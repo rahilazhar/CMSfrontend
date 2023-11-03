@@ -53,7 +53,7 @@ export const CaseHistoryProvider = ({ children }) => {
     // Update case history function
     const updateHistory = async (caseId, date, proceedings) => {
         try {
-            const url = `https://cm-sfrontend.vercel.app/api/v1/auth/updateschema/${caseId}`;
+            const url = `https://cms-vusq.onrender.com/api/v1/auth/updateschema/${caseId}`;
             const response = await axios.put(url, {
                 date,
                 proceedings

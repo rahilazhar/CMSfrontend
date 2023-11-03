@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import {BsSearch} from 'react-icons/bs'
+import { BsSearch } from 'react-icons/bs'
 import { Link } from 'react-router-dom';
 import { CaseHistoryContext } from '../../Context/CaseHistoryContext';
 import { useContext } from 'react';
@@ -10,7 +10,7 @@ const itemsPerPage = 5; // Define how many items per page
 
 const UpdateHistoryForm = () => {
     const { caseId, title } = useParams();
-    const { history, message,  fetchHistory, updatemessage , updateHistory ,entry , fetchHistoryentry } = useContext(CaseHistoryContext);
+    const { history, message, fetchHistory, updatemessage, updateHistory, entry, fetchHistoryentry } = useContext(CaseHistoryContext);
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredHistory, setFilteredHistory] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -23,8 +23,8 @@ const UpdateHistoryForm = () => {
 
     useEffect(() => {
         fetchHistoryentry(caseId);
-        console.log(caseId  , 'case')
-    }, [caseId , fetchHistoryentry , entry]);
+        console.log(caseId, 'case')
+    }, [caseId, fetchHistoryentry, entry]);
 
     useEffect(() => {
         const lowercasedQuery = searchQuery.toLowerCase();
@@ -52,9 +52,9 @@ const UpdateHistoryForm = () => {
         e.preventDefault();
         updateHistory(caseId, date, proceedings);
     };
- 
 
-    console.log(entry.nature , 'entry')
+
+    console.log(entry.nature, 'entry')
 
     return (
         <>
@@ -63,7 +63,7 @@ const UpdateHistoryForm = () => {
                 <div className=' justify-center flex items-center flex-col mb-3'>
                     <p className=' text-xl font-bold relative top-5'>{title}</p>
                     <div>
-                    <BsSearch className=' ml-[1170px] relative top-[30px]' />
+                        <BsSearch className=' ml-[1170px] relative top-[30px]' />
                         <input
                             type="text"
                             placeholder="Date or Description"
@@ -72,10 +72,10 @@ const UpdateHistoryForm = () => {
                                 setCurrentPage(1); // Reset to first page on search
                                 setSearchQuery(e.target.value);
                             }}
-                            
+
                             className="p-2 border-2 ml-[1000px] rounded border-gray-300"
                         />
-                        
+
                     </div>
                 </div>
                 <div>
@@ -144,39 +144,39 @@ const UpdateHistoryForm = () => {
                 </div>
 
                 <div className='mt-12 px-6'>
-        <form onSubmit={handleSubmit} className="space-y-6">
-            <h2 className='text-center font-bold text-xl mb-4 bg-blue-300 p-4'>Update Case History</h2>
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        <h2 className='text-center font-bold text-xl mb-4 bg-blue-300 p-4'>Update Case History</h2>
 
 
-            <label className="block">
-                <span className="text-gray-700 font-bold">Date:</span>
-                <input className='form-input mt-1 block p-1 w-80 rounded  ring-1 ring-gray-300  shadow-sm' type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
-            </label>
+                        <label className="block">
+                            <span className="text-gray-700 font-bold">Date:</span>
+                            <input className='form-input mt-1 block p-1 w-80 rounded  ring-1 ring-gray-300  shadow-sm' type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
+                        </label>
 
 
 
-            <label className="block">
-                <span className='block text-gray-700  mb-1 font-bold'>Description</span>
-                <textarea className='form-textarea mt-1 block w-80 ring-1 ring-gray-300 rounded-md shadow-sm' value={proceedings} onChange={(e) => setProceedings(e.target.value)} rows="4" required></textarea>
-            </label>
+                        <label className="block">
+                            <span className='block text-gray-700  mb-1 font-bold'>Description</span>
+                            <textarea className='form-textarea mt-1 block w-80 ring-1 ring-gray-300 rounded-md shadow-sm' value={proceedings} onChange={(e) => setProceedings(e.target.value)} rows="4" required></textarea>
+                        </label>
 
 
-            <div className='flex justify-center mt-4'>
-                <button className='bg-blue-600 text-white font-bold px-10 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300' type="submit">Update History</button>
+                        <div className='flex justify-center mt-4'>
+                            <button className='bg-blue-600 text-white font-bold px-10 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300' type="submit">Update History</button>
+                        </div>
+                        {updatemessage && <p className="text-center text-green-600">{updatemessage}</p>}
+                    </form>
+                </div>
+
+                <div className='flex justify-center mt-12 mb-6'>
+                    <Link to={`/Factsheet/${caseId}/${title}`}>
+                        <button className='bg-amber-400 text-gray-800 px-6 py-2 rounded hover:bg-amber-500 focus:outline-none focus:ring focus:border-amber-300 transition ease-in duration-200'>Factsheet</button>
+                    </Link>
+                </div>
             </div>
-            {updatemessage && <p className="text-center text-green-600">{updatemessage}</p>}
-        </form>
-    </div>
 
-    <div className='flex justify-center mt-12 mb-6'>
-        <Link to={`/Factsheet/${caseId}/${title}`}>
-            <button className='bg-amber-400 text-gray-800 px-6 py-2 rounded hover:bg-amber-500 focus:outline-none focus:ring focus:border-amber-300 transition ease-in duration-200'>Factsheet</button>
-        </Link>
-    </div>
-            </div>
-            
 
-           
+
         </>
     );
 };
