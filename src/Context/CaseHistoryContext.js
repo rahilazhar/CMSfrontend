@@ -9,6 +9,7 @@ export const CaseHistoryProvider = ({ children }) => {
     const [entry, setEntry] = useState([]);
     const [factview, setFactview] = useState([]);
     const [message, setMessage] = useState('');
+    const [updatemessage, setUpdatemessage] = useState('');
     const [loading, setLoading] = useState(false); // New loading state
 
     // Fetch case history function
@@ -40,7 +41,7 @@ export const CaseHistoryProvider = ({ children }) => {
             const url = `https://cms-vusq.onrender.com/api/v1/auth/factsheet/caseentry/${caseId}`;
             const response = await axios.get(url);
             setFactview(response.data);
-
+            
         } catch (error) {
             console.error(error);
             setMessage('Failed to fetch case history');
@@ -57,7 +58,7 @@ export const CaseHistoryProvider = ({ children }) => {
                 date,
                 proceedings
             });
-            setMessage(response.data.Message);
+            setUpdatemessage(response.data.Message);
             setHistory([...history, { date, proceedings }]);
         } catch (error) {
             console.error(error);
@@ -66,7 +67,7 @@ export const CaseHistoryProvider = ({ children }) => {
     };
 
     return (
-        <CaseHistoryContext.Provider value={{ history, message, entry, factview, loading, fetchfactsheet, fetchHistoryentry, fetchHistory, updateHistory }}>
+        <CaseHistoryContext.Provider value={{ history, message, entry, updatemessage , factview, loading, fetchfactsheet, fetchHistoryentry, fetchHistory, updateHistory }}>
             {children}
         </CaseHistoryContext.Provider>
     );

@@ -10,7 +10,7 @@ const itemsPerPage = 5; // Define how many items per page
 
 const UpdateHistoryForm = () => {
     const { caseId, title } = useParams();
-    const { history, message, fetchHistory, updateHistory ,entry , fetchHistoryentry } = useContext(CaseHistoryContext);
+    const { history, message,  fetchHistory, updatemessage , updateHistory ,entry , fetchHistoryentry } = useContext(CaseHistoryContext);
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredHistory, setFilteredHistory] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -164,7 +164,7 @@ const UpdateHistoryForm = () => {
             <div className='flex justify-center mt-4'>
                 <button className='bg-blue-600 text-white font-bold px-10 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300' type="submit">Update History</button>
             </div>
-           
+            {updatemessage && <p className="text-center text-green-600">{updatemessage}</p>}
         </form>
     </div>
 
