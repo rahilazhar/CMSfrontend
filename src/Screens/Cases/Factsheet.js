@@ -11,6 +11,7 @@ var lengthOfHistoryString = entry ?  entry.history.length.toString() : "0"
 
   const { caseId } = useParams();
   const { title } = useParams();
+  const [message , setMessage]  = useState('')
   const [formData, setFormData] = useState({
     facts: '',
     caseinstituted: '',
@@ -47,6 +48,8 @@ var lengthOfHistoryString = entry ?  entry.history.length.toString() : "0"
         defendants: '',
         lastdateofhearing: '',
       });
+
+      setMessage(response.data.Message)
     } catch (error) {
       console.error('Error creating factsheet:', error);
     }
@@ -68,12 +71,12 @@ var lengthOfHistoryString = entry ?  entry.history.length.toString() : "0"
       }
     }
   };
-  // const wordCount = formData.facts.split(/\s+/).filter(Boolean).length;
+  const wordCount = formData.facts.split(/\s+/).filter(Boolean).length;
   const letterCount = formData.facts.length;
   const isLimitExceeded = letterCount === 1000;
 
 
-  console.log(entry)
+  console.log(message)
 
   return (
     <>
@@ -81,7 +84,7 @@ var lengthOfHistoryString = entry ?  entry.history.length.toString() : "0"
         <div class="w-[700px] mx-auto bg-white p-6 rounded-lg shadow-lg">
           <h2 class="text-2xl font-semibold mb-4">Create a Factsheet of {title}</h2>
           <form onSubmit={handleSubmit} class="space-y-4">
-            {/* <div>
+            <div>
             <label htmlFor="facts" className="block text-sm font-medium text-gray-700">
               Facts (Max 1000 words):
             </label>
@@ -96,33 +99,8 @@ var lengthOfHistoryString = entry ?  entry.history.length.toString() : "0"
             <p className="text-gray-500 text-sm mt-2">
               {1000 - wordCount} words remaining
             </p>
-          </div> */}
-            <div>
-              <label htmlFor="facts" className="block text-sm font-medium text-gray-700">
-                Facts (1000 letters max):
-              </label>
-              <div className="relative">
-                <textarea
-                  id="facts"
-                  name="facts"
-                  value={formData.facts}
-                  onChange={handleFactsChange}
-                  onKeyDown={handleKeyDown}
-                  required
-                  className={`mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring focus:ring-blue-200 focus:outline-none ${isLimitExceeded ? 'bg-gray-200' : ''
-                    }`}
-
-                  contentEditable={isLimitExceeded}
-                ></textarea>
-
-
-
-              </div>
-              {isLimitExceeded && (
-                <p className="text-red-500 text-sm mt-2">Limit of 1000 letters reached</p>
-              )}
-              {letterCount} / 1000
-            </div>
+          </div>
+           
             <div>
               <label for="caseinstituted" class="block text-sm font-medium text-gray-700">When the case instituted:</label>
               <input

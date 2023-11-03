@@ -26,6 +26,9 @@ const UpdateHistoryForm = () => {
         console.log(caseId, 'case')
     }, [caseId, fetchHistoryentry, entry]);
 
+
+    
+
     useEffect(() => {
         const lowercasedQuery = searchQuery.toLowerCase();
         const filtered = !searchQuery ? history : history.filter(entry =>
@@ -35,6 +38,9 @@ const UpdateHistoryForm = () => {
         setFilteredHistory(filtered);
         setCurrentPage(1);
     }, [searchQuery, history]);
+
+
+
 
     // Pagination logic
     const lastItemIndex = currentPage * itemsPerPage;

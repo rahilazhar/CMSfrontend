@@ -7,6 +7,18 @@ import {AiFillEye} from 'react-icons/ai'
 const Viewcases = () => {
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredHistory, setFilteredHistory] = useState([]);
+
+  useEffect(() => {
+    const lowercasedQuery = searchQuery.toLowerCase();
+    const filtered = !searchQuery ? entries : entries.filter(entry =>
+        entry.title.toLowerCase().includes(lowercasedQuery) ||
+        entry.nature.toLowerCase().includes(lowercasedQuery)
+    );
+    setFilteredHistory(filtered);
+   
+}, [searchQuery, entries]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,10 +35,16 @@ const Viewcases = () => {
     fetchData();
   }, []);
 
+  console.log(entries , 'entries')
+
   return (
     <div className='w-full mx-auto px-4 sm:px-6 lg:px-8'>
     <div className="flex flex-col mt-8">
         <div className="align-middle min-w-full overflow-x-auto shadow overflow-hidden sm:rounded-lg">
+            <input className=' border border-black mt-3 mb-3 rounded p-3' type="text" placeholder='Search'
+            onChange={(e)=>setSearchQuery(e.target.value)}
+            value={searchQuery}
+            />
             <table className="min-w-full divide-y divide-green-900 border">
                 <thead>
                     <tr className="bg-gray-50">
@@ -77,7 +95,7 @@ const Viewcases = () => {
                             </td>
                         </tr>
                     )}
-                    {!loading && entries.map((entry, index) => (
+                    {!loading && filteredHistory.map((entry, index) => (
                         <tr key={index} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-gray-100`}>
                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{index + 1}</td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.Suitno}</td>
