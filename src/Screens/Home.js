@@ -14,7 +14,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8082/api/v1/auth/getentries');
+        const response = await axios.get('https://cms-vusq.onrender.com/api/v1/auth/getentries');
         setEntries(response.data);
       } catch (error) {
         console.error('Error fetching data: ', error);
@@ -31,7 +31,7 @@ const Home = () => {
 useEffect(() => {
   const fetchTodayCases = async () => {
     try {
-      const response = await axios.get('http://localhost:8082/api/v1/auth/gettodayentries');
+      const response = await axios.get('https://cms-vusq.onrender.com/api/v1/auth/gettodayentries');
       setTodayCases(response.data);
     } catch (error) {
       console.error('Error fetching today cases: ', error);
