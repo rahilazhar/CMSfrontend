@@ -5,7 +5,7 @@ import { BsSearch } from 'react-icons/bs'
 import { Link } from 'react-router-dom';
 import { CaseHistoryContext } from '../../Context/CaseHistoryContext';
 import { useContext } from 'react';
-import toast , {Toaster} from 'react-hot-toast'
+import toast, { Toaster } from 'react-hot-toast'
 const itemsPerPage = 5; // Define how many items per page
 
 const UpdateHistoryForm = () => {
@@ -27,7 +27,7 @@ const UpdateHistoryForm = () => {
     }, [caseId, fetchHistoryentry, entry]);
 
 
-    
+
 
     useEffect(() => {
         const lowercasedQuery = searchQuery.toLowerCase();
@@ -64,7 +64,7 @@ const UpdateHistoryForm = () => {
             toast.error("An error occurred.");
         }
     };
-    
+
 
 
     console.log(entry.nature, 'entry')
@@ -163,7 +163,7 @@ const UpdateHistoryForm = () => {
 
                         <label className="block">
                             <span className="text-gray-700 font-bold">Date:</span>
-                            <input className='form-input mt-1 block p-1 w-80 rounded  ring-1 ring-gray-300  shadow-sm' type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
+                            <input className='form-input mt-1 block p-1 w-80 rounded  ring-1 ring-gray-300  shadow-sm' type="text" value={date} onChange={(e) => setDate(e.target.value)} required />
                         </label>
 
 
