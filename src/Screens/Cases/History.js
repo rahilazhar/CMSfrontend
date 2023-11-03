@@ -164,7 +164,7 @@ const UpdateHistoryForm = () => {
             <div className='flex justify-center mt-4'>
                 <button className='bg-blue-600 text-white font-bold px-10 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300' type="submit">Update History</button>
             </div>
-            {message && <p className="text-center text-green-600">{message}</p>}
+           
         </form>
     </div>
 
