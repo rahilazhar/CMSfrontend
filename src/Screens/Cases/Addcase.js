@@ -18,7 +18,7 @@ const Addcase = () => {
         event.preventDefault(); // Prevent the form from submitting the traditional way
 
         try {
-            const response = await fetch('http://localhost:8082/api/v1/auth/entries', {
+            const response = await fetch('https://cms-vusq.onrender.com/api/v1/auth/entries', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',

@@ -5,7 +5,7 @@ import { BsSearch } from 'react-icons/bs'
 import { Link } from 'react-router-dom';
 import { CaseHistoryContext } from '../../Context/CaseHistoryContext';
 import { useContext } from 'react';
-
+import toast , {Toaster} from 'react-hot-toast'
 const itemsPerPage = 5; // Define how many items per page
 
 const UpdateHistoryForm = () => {
@@ -50,8 +50,15 @@ const UpdateHistoryForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        updateHistory(caseId, date, proceedings);
+        try {
+            await updateHistory(caseId, date, proceedings);
+            toast.success("Add Successfully");
+        } catch (error) {
+            // Handle or log the error
+            toast.error("An error occurred.");
+        }
     };
+    
 
 
     console.log(entry.nature, 'entry')
@@ -164,7 +171,7 @@ const UpdateHistoryForm = () => {
                         <div className='flex justify-center mt-4'>
                             <button className='bg-blue-600 text-white font-bold px-10 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300' type="submit">Update History</button>
                         </div>
-                        {updatemessage && <p className="text-center text-green-600">{updatemessage}</p>}
+
                     </form>
                 </div>
 
@@ -173,6 +180,10 @@ const UpdateHistoryForm = () => {
                         <button className='bg-amber-400 text-gray-800 px-6 py-2 rounded hover:bg-amber-500 focus:outline-none focus:ring focus:border-amber-300 transition ease-in duration-200'>Factsheet</button>
                     </Link>
                 </div>
+                <Toaster
+                    position="top-center"
+                    reverseOrder={false}
+                />
             </div>
 
 
