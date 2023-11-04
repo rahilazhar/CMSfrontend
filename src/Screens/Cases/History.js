@@ -72,6 +72,8 @@ const UpdateHistoryForm = () => {
             const response = await axios.delete(`https://cms-vusq.onrender.com/api/v1/auth/caseentries/${caseId}/history/${historyid}`);
             alert(response.data.Message); // Alert or handle the success response
             // Refresh the state or perform any other actions after deletion
+            fetchHistory(caseId)
+            // fetchHistoryentry(caseId)
         } catch (error) {
             // Handle the error response
             alert(error.response ? error.response.data.Message : "An error occurred");
