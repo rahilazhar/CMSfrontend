@@ -15,7 +15,7 @@ export const CaseHistoryProvider = ({ children }) => {
     // Fetch case history function
     const fetchHistory = async (caseId) => {
         try {
-            const url = `https://cms-vusq.onrender.com/api/v1/auth/gethistory/${caseId}`;
+            const url = `http://localhost:8082/api/v1/auth/gethistory/${caseId}`;
             const response = await axios.get(url);
             setHistory(response.data);
         } catch (error) {
@@ -23,6 +23,8 @@ export const CaseHistoryProvider = ({ children }) => {
             setMessage('Failed to fetch case history');
         }
     };
+
+
     const fetchHistoryentry = async (caseId) => {
         try {
             const url = `https://cms-vusq.onrender.com/api/v1/auth/getentriesid/${caseId}`;
@@ -34,6 +36,8 @@ export const CaseHistoryProvider = ({ children }) => {
             setMessage('Failed to fetch case history');
         }
     };
+
+
     const fetchfactsheet = async (caseId) => {
         setLoading(true); // Start loading
         setFactview([]); // Reset factview state before loading new data

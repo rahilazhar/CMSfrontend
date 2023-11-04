@@ -17,29 +17,19 @@ const UpdateHistoryForm = () => {
     const [date, setDate] = useState('');
     const [proceedings, setProceedings] = useState('');
 
+    
+
     useEffect(() => {
         fetchHistory(caseId);
-    }, [caseId]);
-
-    useEffect(() => {
         fetchHistoryentry(caseId);
-        console.log(caseId, 'case')
-    }, [caseId, fetchHistoryentry, entry]);
-
-
-
-
-    useEffect(() => {
         const lowercasedQuery = searchQuery.toLowerCase();
         const filtered = !searchQuery ? history : history.filter(entry =>
-            entry.date.toLowerCase().includes(lowercasedQuery) ||
-            entry.proceedings.toLowerCase().includes(lowercasedQuery)
+          entry.date.toLowerCase().includes(lowercasedQuery) ||
+            entry.proceedings.toLowerCase().includes(lowercasedQuery) 
         );
         setFilteredHistory(filtered);
-        setCurrentPage(1);
-    }, [searchQuery, history]);
-
-
+        
+    }, [caseId  , searchQuery , entry]);
 
 
     // Pagination logic
@@ -65,9 +55,25 @@ const UpdateHistoryForm = () => {
         }
     };
 
+  
+        const deleteHistory = async (historyid) => {
+          try {
+            const response = await axios.delete(`http://localhost:8082/api/v1/auth/caseentries/${caseId}/history/${historyid}`);
+            alert(response.data.Message); // Alert or handle the success response
+            // Refresh the state or perform any other actions after deletion
+            fetchHistory(caseId)
+            if (currentItems.length === 0 && currentPage > 1) {
+                setCurrentPage(currentPage - 1);
+            }
+          } catch (error) {
+            // Handle the error response
+            alert(error.response ? error.response.data.Message : "An error occurred");
+          }
+        };
+
+       
 
 
-    console.log(entry.nature, 'entry')
 
     return (
         <>
@@ -100,6 +106,7 @@ const UpdateHistoryForm = () => {
                                     <th className="px-6 py-3 font-semi-bold text-center text-gray-600 border-r-2 border-black bg-red-100">#</th>
                                     <th className="px-6 py-3 font-semi-bold text-center text-gray-600 border-r-2 border-black uppercase bg-red-100">Date</th>
                                     <th className="px-6 py-3 font-semi-bold text-center text-gray-600 border-r-2 border-black uppercase bg-red-100">Description</th>
+                                    <th className="px-6 py-3 font-semi-bold text-center text-gray-600 border-r-2 border-black uppercase bg-red-100">Delete</th>
                                 </tr>
                             </thead>
                             {/* Table body */}
@@ -109,6 +116,7 @@ const UpdateHistoryForm = () => {
                                         <td className="px-6 text-center py-4 text-gray-800 whitespace-normal border-r border-black">{firstItemIndex + index + 1}</td>
                                         <td className="px-6 text-center py-4 text-gray-800 whitespace-normal border-r border-black">{entry.date}</td>
                                         <td className="px-6 text-center py-4 text-gray-800 whitespace-normal border-r border-black">{entry.proceedings}</td>
+                                        <td className="px-6 text-center py-4 text-gray-800 whitespace-normal border-r border-black"><button onClick={()=>deleteHistory(entry._id)}>Delete</button></td>
                                     </tr>
                                 ))}
                             </tbody>
