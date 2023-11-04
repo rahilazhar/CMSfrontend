@@ -33,11 +33,13 @@ const Sidebar = () => {
           </div>
 
           <ul className=' pt-2'>
+           
             {Menue.map((items, index) => (
               <>
                 <li key={index} className={` text-gray-300 flex items-center text-sm gap-x-4 cursor-pointer p-2 hover:bg-light-white rounded-md ${items.spacing ? "mt-9" : "mt-2"}`}>
                   <span><RiDashboardFill/></span>
                   <span className={`font-medium text-base flex-1 duration-200 ${!open && " hidden"}`}>  <a href={items.link}>{items.title}</a></span>
+                  
                   {items.submenue && open && (
                     <BsChevronDown className={ ` duration-300 ${submenueopen && "rotate-180"}`}  onClick={() => setSubmenueopen(!submenueopen)}/>
                   )}
@@ -51,14 +53,16 @@ const Sidebar = () => {
                         <a href={sub.link}>{sub.title}</a>
                       </li>
                     ))}
+                  
                   </ul>
+                  
                 )}
               </>
             )
 
             )}
           </ul>
-
+         
         </div>
        
         </div>

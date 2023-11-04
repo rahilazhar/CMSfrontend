@@ -10,6 +10,7 @@ import Viewtodaycase from '../Screens/Cases/Viewtodaycase'
 
 
 
+
 const Router = () => {
   return (
    <>
@@ -21,6 +22,7 @@ const Router = () => {
        <Route path='/Factsheet/:caseId/:title' element={<Factsheet/>}/>
        <Route path='/factsheetview/:caseId' element={<Factsheetview/>}/>
        <Route path='/todaycase' element={<Viewtodaycase/>}/>
+      
       
 
    </Routes>

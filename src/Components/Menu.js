@@ -20,7 +20,12 @@ export const Menue = [
     {
       title:"View Cases",
       link:'/viewcases'
-    }
+    },
+    {
+      title: "Logout",
+      action: "logout", // This is a unique identifier for the logout action.
+    },
+   
     // { title: "Media", link: "/media", spacing: true },
    
   

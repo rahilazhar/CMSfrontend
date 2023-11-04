@@ -2,14 +2,19 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { BsFill0SquareFill } from "react-icons/bs";
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../Context/AuthContext';
 
 const Home = () => {
+
+  const {logout} = useAuth()
 
   const [entries, setEntries] = useState([]);
   const [todayCases, setTodayCases] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +32,8 @@ const Home = () => {
     fetchData();
   }, []);
 
+  
+
 
 useEffect(() => {
   const fetchTodayCases = async () => {
@@ -43,6 +50,12 @@ useEffect(() => {
   fetchTodayCases();
 }, []);
 
+const logouthandler = () =>{
+    logout()
+}
+   
+
+     
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -111,6 +124,7 @@ useEffect(() => {
         <section className=' flex flex-col justify-center items-center h-[500px]'>
           <div className=' text-[50px] font-semibold'>WELCOME TO CMS SYSTEM</div>
           <Link to="/addcase"> <span className=' text-lg text-blue-600'>Click here to Add your First Case</span></Link>
+          <button onClick={logouthandler}>Logout</button>
         </section>
 
       </main>
