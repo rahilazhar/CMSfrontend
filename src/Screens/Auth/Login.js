@@ -17,10 +17,10 @@ function LoginPage() {
     try {
       // Replace with your actual login API endpoint
       const response = await axios.post('https://cms-vusq.onrender.com/api/v1/auth/login', { email, password });
-      const { token, id, role, name } = response.data;
+      const { token, id, role, name , password } = response.data;
 
       // Use the login function from AuthContext to set the user as logged in
-      login({ email, role, id, name, token }); // Pass the response data to the login context method
+      login({ email, role, id, name, token , password }); // Pass the response data to the login context method
 
       // After successful login, redirect to the desired page
       navigate('/'); // Redirect to the homepage or dashboard as per your routing setup
