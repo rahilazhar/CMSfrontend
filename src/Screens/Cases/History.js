@@ -16,20 +16,31 @@ const UpdateHistoryForm = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [date, setDate] = useState('');
     const [proceedings, setProceedings] = useState('');
-
-    
+    const [id, setID] = useState('')
 
     useEffect(() => {
         fetchHistory(caseId);
+    }, [caseId]);
+
+    useEffect(() => {
         fetchHistoryentry(caseId);
+        console.log(caseId, 'case')
+    }, [caseId, fetchHistoryentry, entry]);
+
+
+
+
+    useEffect(() => {
         const lowercasedQuery = searchQuery.toLowerCase();
         const filtered = !searchQuery ? history : history.filter(entry =>
-          entry.date.toLowerCase().includes(lowercasedQuery) ||
-            entry.proceedings.toLowerCase().includes(lowercasedQuery) 
+            entry.date.toLowerCase().includes(lowercasedQuery) ||
+            entry.proceedings.toLowerCase().includes(lowercasedQuery)
         );
         setFilteredHistory(filtered);
-        
-    }, [caseId  , searchQuery , entry]);
+
+    }, [searchQuery, entry]);
+
+
 
 
     // Pagination logic
@@ -55,25 +66,22 @@ const UpdateHistoryForm = () => {
         }
     };
 
-  
-        const deleteHistory = async (historyid) => {
-          try {
-            const response = await axios.delete(`http://localhost:8082/api/v1/auth/caseentries/${caseId}/history/${historyid}`);
+
+    const deleteHistory = async (historyid) => {
+        try {
+            const response = await axios.delete(`https://cms-vusq.onrender.com/api/v1/auth/caseentries/${caseId}/history/${historyid}`);
             alert(response.data.Message); // Alert or handle the success response
             // Refresh the state or perform any other actions after deletion
-            fetchHistory(caseId)
-            if (currentItems.length === 0 && currentPage > 1) {
-                setCurrentPage(currentPage - 1);
-            }
-          } catch (error) {
+        } catch (error) {
             // Handle the error response
             alert(error.response ? error.response.data.Message : "An error occurred");
-          }
-        };
-
-       
+        }
+    };
 
 
+
+    console.log(entry.nature, 'entry')
+    console.log(id, 'id')
 
     return (
         <>
@@ -116,7 +124,7 @@ const UpdateHistoryForm = () => {
                                         <td className="px-6 text-center py-4 text-gray-800 whitespace-normal border-r border-black">{firstItemIndex + index + 1}</td>
                                         <td className="px-6 text-center py-4 text-gray-800 whitespace-normal border-r border-black">{entry.date}</td>
                                         <td className="px-6 text-center py-4 text-gray-800 whitespace-normal border-r border-black">{entry.proceedings}</td>
-                                        <td className="px-6 text-center py-4 text-gray-800 whitespace-normal border-r border-black"><button onClick={()=>deleteHistory(entry._id)}>Delete</button></td>
+                                        <td className="px-6 text-center py-4 text-gray-800 whitespace-normal border-r border-black"><button onClick={() => deleteHistory(entry._id)}>Delete</button></td>
                                     </tr>
                                 ))}
                             </tbody>

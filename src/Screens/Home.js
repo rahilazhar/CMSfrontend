@@ -76,7 +76,7 @@ useEffect(() => {
               </div>
               <hr className='mt-8 shadow-2xl' style={{ borderColor: 'black' }} />
               <div className='shadow-2xl relative top-2'>
-                <a href="">View Details</a>
+                <Link to="/todaycase">View Details</Link>
               </div>
             </div>
             

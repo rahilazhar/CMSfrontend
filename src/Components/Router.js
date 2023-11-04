@@ -6,6 +6,8 @@ import DataTable from '../Screens/Cases/Viewcases'
 import History from '../Screens/Cases/History'
 import Factsheet from '../Screens/Cases/Factsheet'
 import Factsheetview from '../Screens/Cases/Factsheetview'
+import Viewtodaycase from '../Screens/Cases/Viewtodaycase'
+
 
 
 const Router = () => {
@@ -18,6 +20,8 @@ const Router = () => {
        <Route path='/viewdetails/:caseId/:title' element={<History/>}/>
        <Route path='/Factsheet/:caseId/:title' element={<Factsheet/>}/>
        <Route path='/factsheetview/:caseId' element={<Factsheetview/>}/>
+       <Route path='/todaycase' element={<Viewtodaycase/>}/>
+      
 
    </Routes>
    </>

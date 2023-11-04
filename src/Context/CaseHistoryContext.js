@@ -15,7 +15,7 @@ export const CaseHistoryProvider = ({ children }) => {
     // Fetch case history function
     const fetchHistory = async (caseId) => {
         try {
-            const url = `http://localhost:8082/api/v1/auth/gethistory/${caseId}`;
+            const url = `https://cms-vusq.onrender.com/api/v1/auth/gethistory/${caseId}`;
             const response = await axios.get(url);
             setHistory(response.data);
         } catch (error) {
