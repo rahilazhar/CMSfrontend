@@ -40,9 +40,11 @@ function LoginPage() {
         backgroundImage: "url('https://as1.ftcdn.net/v2/jpg/01/22/71/96/1000_F_122719641_V0yw2cAOrfxsON3HeWi2Sf4iVxhv27QO.jpg')",
       }}
     >
+      
       <div className="flex items-center justify-center h-full">
+        
         <div
-          className="w-full max-w-xs p-8 bg-gray-100 bg-opacity-90 rounded-lg shadow-xl"
+          className="w-full max-w-xs p-8 bg-gray-100   bg-opacity-50 rounded-lg shadow-xl"
           style={{
             backgroundImage: "url('https://example.com/your-login-section-background.jpg')",
             backgroundPosition: 'center',
@@ -50,7 +52,9 @@ function LoginPage() {
             backgroundRepeat: 'no-repeat',
           }}
         >
+         
           <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
+          <div className=' text-center bg-amber-500 p-4 text-xl bg-opacity-90 text-white font-bold'>ZIA & SHAH</div>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Email
