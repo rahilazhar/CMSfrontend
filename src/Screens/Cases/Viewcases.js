@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import {BsFillFileEarmarkSpreadsheetFill} from 'react-icons/bs'
 import {AiFillEye} from 'react-icons/ai'
+import { urlapi } from '../../Components/Menu';
 
 const Viewcases = () => {
   const [entries, setEntries] = useState([]);
@@ -23,7 +24,7 @@ const Viewcases = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://cms-vusq.onrender.com/api/v1/auth/getentries');
+        const response = await axios.get(`${urlapi}/api/v1/auth/getentries`);
         setEntries(response.data);
       } catch (error) {
         console.error('Error fetching data: ', error);
@@ -70,6 +71,9 @@ const Viewcases = () => {
                             Fact sheet
                         </th>
                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Report
+                        </th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             View Details
                         </th>
                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -104,6 +108,7 @@ const Viewcases = () => {
                             <td className=" py-4 whitespace-normal text-sm text-gray-500">{entry.prevhearing}</td>
                             <td className=" py-4 whitespace-normal text-sm text-gray-500">{entry.nexthearing}</td>
                             <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">{entry.factsheet}</td>
+                            <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">{entry.progressreport}</td>
                             <td className="px-10 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <Link to={`/viewdetails/${entry._id}/${entry.title}`} className="text-indigo-600 hover:text-indigo-900">
                                     <AiFillEye className=''/>

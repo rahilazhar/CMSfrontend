@@ -1,6 +1,7 @@
 // CaseHistoryContext.js
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { urlapi } from '../Components/Menu';
 
 export const CaseHistoryContext = createContext(null);
 
@@ -15,7 +16,7 @@ export const CaseHistoryProvider = ({ children }) => {
     // Fetch case history function
     const fetchHistory = async (caseId) => {
         try {
-            const url = `https://cms-vusq.onrender.com/api/v1/auth/gethistory/${caseId}`;
+            const url = `${urlapi}/api/v1/auth/gethistory/${caseId}`;
             const response = await axios.get(url);
             setHistory(response.data);
         } catch (error) {
@@ -27,7 +28,7 @@ export const CaseHistoryProvider = ({ children }) => {
 
     const fetchHistoryentry = async (caseId) => {
         try {
-            const url = `https://cms-vusq.onrender.com/api/v1/auth/getentriesid/${caseId}`;
+            const url = `${urlapi}/api/v1/auth/getentriesid/${caseId}`;
             const response = await axios.get(url);
             setEntry(response.data);
 
@@ -42,7 +43,7 @@ export const CaseHistoryProvider = ({ children }) => {
         setLoading(true); // Start loading
         setFactview([]); // Reset factview state before loading new data
         try {
-            const url = `https://cms-vusq.onrender.com/api/v1/auth/factsheet/caseentry/${caseId}`;
+            const url = `${urlapi}/api/v1/auth/factsheet/caseentry/${caseId}`;
             const response = await axios.get(url);
             setFactview(response.data);
             
@@ -57,7 +58,7 @@ export const CaseHistoryProvider = ({ children }) => {
     // Update case history function
     const updateHistory = async (caseId, date, proceedings) => {
         try {
-            const url = `https://cms-vusq.onrender.com/api/v1/auth/updateschema/${caseId}`;
+            const url = `${urlapi}/api/v1/auth/updateschema/${caseId}`;
             const response = await axios.put(url, {
                 date,
                 proceedings
@@ -69,6 +70,36 @@ export const CaseHistoryProvider = ({ children }) => {
             setMessage('Failed to update case entry');
         }
     };
+    // const updateHistory = async (caseId, date, proceedings) => {
+    //     try {
+    //         setLoading(true); // Indicate loading state
+    //         const url = `${urlapi}/api/v1/auth/updateschema/${caseId}`;
+    //         const response = await axios.put(url, {
+    //             date,
+    //             proceedings
+    //         });
+    //         if (response.data && response.data.newEntry) {
+    //             setUpdatemessage(response.data.message);
+    //             setHistory(prevHistory => [...prevHistory, response.data.newEntry]);
+    
+    //             // Update filteredHistory to include the new entry
+    //             setHistory(prevFilteredHistory => [...prevFilteredHistory, response.data.newEntry]);
+    //         } else {
+    //             // Handle the case where the server doesn't return a newEntry as expected
+    //             console.error('Server did not return the expected new entry');
+    //         }
+    //     } catch (error) {
+    //         console.error(error);
+    //         setMessage('Failed to update case entry');
+    //     } finally {
+    //         setLoading(false); // Indicate loading has finished
+    //     }
+    // };
+    
+    
+
+
+
 
     return (
         <CaseHistoryContext.Provider value={{ history, message, entry, updatemessage , factview, loading, fetchfactsheet, fetchHistoryentry, fetchHistory, updateHistory }}>

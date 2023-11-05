@@ -4,6 +4,7 @@ import axios from 'axios';
 import { BsFill0SquareFill } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Context/AuthContext';
+import { urlapi } from '../Components/Menu';
 
 const Home = () => {
 
@@ -19,7 +20,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://cms-vusq.onrender.com/api/v1/auth/getentries');
+        const response = await axios.get(`${urlapi}/api/v1/auth/getentries`);
         setEntries(response.data);
       } catch (error) {
         console.error('Error fetching data: ', error);
@@ -38,7 +39,7 @@ const Home = () => {
 useEffect(() => {
   const fetchTodayCases = async () => {
     try {
-      const response = await axios.get('https://cms-vusq.onrender.com/api/v1/auth/gettodayentries');
+      const response = await axios.get(`${urlapi}/api/v1/auth/gettodayentries`);
       setTodayCases(response.data);
     } catch (error) {
       console.error('Error fetching today cases: ', error);
@@ -66,7 +67,7 @@ const logouthandler = () =>{
           <div className=' font-semibold text-2xl'>Dashboard</div>
         </section>
         <section>
-          <div className=' grid grid-cols-4 gap-3 p-3'>
+          <div className=' grid grid-cols-4 gap-3 p-3 max-sm:grid-cols-1'>
 
             {/* Primary */}
             <div className='w-full pb-4 text-white p-4 bg-[#0d6efd] rounded'>

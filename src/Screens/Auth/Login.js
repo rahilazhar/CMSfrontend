@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContext';
+import { urlapi } from '../../Components/Menu';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -16,7 +17,7 @@ function LoginPage() {
 
     try {
       // Replace with your actual login API endpoint
-      const response = await axios.post('https://cms-vusq.onrender.com/api/v1/auth/login', { email, password });
+      const response = await axios.post(`${urlapi}/api/v1/auth/login`, { email, password });
       const { token, id, role, name } = response.data;
 
       // Use the login function from AuthContext to set the user as logged in

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {BiHash} from 'react-icons/bi'
+import { urlapi } from '../../Components/Menu';
 
 const Addcase = () => {
     const [Suitno, setSuitNo] = useState('');
@@ -11,6 +12,7 @@ const Addcase = () => {
     const [progressreport, setProgressReport] = useState('');
     const [message, setMessage] = useState('');
     const [isError, setIsError] = useState(false);
+    
 
 
 
@@ -18,7 +20,7 @@ const Addcase = () => {
         event.preventDefault(); // Prevent the form from submitting the traditional way
 
         try {
-            const response = await fetch('https://cms-vusq.onrender.com/api/v1/auth/entries', {
+            const response = await fetch(`${urlapi}/api/v1/auth/entries`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',

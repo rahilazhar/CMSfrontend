@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { CaseHistoryContext } from '../../Context/CaseHistoryContext';
 import toast, { Toaster } from 'react-hot-toast'
+import { urlapi } from '../../Components/Menu';
 
 const Factsheet = () => {
 const {entry , fetchHistoryentry } = useContext(CaseHistoryContext);
@@ -42,7 +43,7 @@ const natureOfCase = entry && entry.nature ? entry.nature : '';
     e.preventDefault();
 
     try {
-      const response = await axios.post(`https://cms-vusq.onrender.com/api/v1/auth/factsheet/${caseId}`, formData);
+      const response = await axios.post(`${urlapi}/api/v1/auth/factsheet/${caseId}`, formData);
 
       console.log('Factsheet created:', response.data);
 

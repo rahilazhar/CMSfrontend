@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { CaseHistoryContext } from '../../Context/CaseHistoryContext';
 import { useContext } from 'react';
 import toast, { Toaster } from 'react-hot-toast'
+import { urlapi } from '../../Components/Menu';
+import {MdDeleteForever} from 'react-icons/md'
 const itemsPerPage = 5; // Define how many items per page
 
 const UpdateHistoryForm = () => {
@@ -20,7 +22,7 @@ const UpdateHistoryForm = () => {
 
     useEffect(() => {
         fetchHistory(caseId);
-    }, [caseId]);
+    }, []);
 
     useEffect(() => {
         fetchHistoryentry(caseId);
@@ -37,8 +39,8 @@ const UpdateHistoryForm = () => {
             entry.proceedings.toLowerCase().includes(lowercasedQuery)
         );
         setFilteredHistory(filtered);
-
-    }, [searchQuery, entry]);
+    }, [searchQuery, history , entry]);
+    
 
 
 
@@ -60,6 +62,7 @@ const UpdateHistoryForm = () => {
         try {
             await updateHistory(caseId, date, proceedings);
             toast.success("Add Successfully");
+            fetchHistory(caseId);
         } catch (error) {
             // Handle or log the error
             toast.error("An error occurred.");
@@ -69,21 +72,26 @@ const UpdateHistoryForm = () => {
 
     const deleteHistory = async (historyid) => {
         try {
-            const response = await axios.delete(`https://cms-vusq.onrender.com/api/v1/auth/caseentries/${caseId}/history/${historyid}`);
+            const response = await axios.delete(`${urlapi}/api/v1/auth/caseentries/${caseId}/history/${historyid}`);
             alert(response.data.Message); // Alert or handle the success response
             // Refresh the state or perform any other actions after deletion
             fetchHistory(caseId)
+            
+            console.log(historyid, "historyid")
+            console.log(caseId, "caseid")
+            console.log(urlapi, "urlapi")
             // fetchHistoryentry(caseId)
         } catch (error) {
             // Handle the error response
             alert(error.response ? error.response.data.Message : "An error occurred");
         }
+
     };
 
+ 
 
+ 
 
-    console.log(entry.nature, 'entry')
-    console.log(id, 'id')
 
     return (
         <>
@@ -122,11 +130,12 @@ const UpdateHistoryForm = () => {
                             {/* Table body */}
                             <tbody className="bg-white border-black border">
                                 {currentItems.map((entry, index) => (
+                                    
                                     <tr key={index} className='border-black border'>
                                         <td className="px-6 text-center py-4 text-gray-800 whitespace-normal border-r border-black">{firstItemIndex + index + 1}</td>
                                         <td className="px-6 text-center py-4 text-gray-800 whitespace-normal border-r border-black">{entry.date}</td>
                                         <td className="px-6 text-center py-4 text-gray-800 whitespace-normal border-r border-black">{entry.proceedings}</td>
-                                        <td className="px-6 text-center py-4 text-gray-800 whitespace-normal border-r border-black"><button onClick={() => deleteHistory(entry._id)}>Delete</button></td>
+                                        <td className="px-6 text-center py-4 text-gray-800 whitespace-normal border-r border-black"><button className=' hover:text-red-500 text-2xl' onClick={() => deleteHistory(entry._id)}><MdDeleteForever/></button></td>
                                     </tr>
                                 ))}
                             </tbody>
