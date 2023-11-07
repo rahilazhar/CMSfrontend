@@ -65,7 +65,7 @@ const Viewcases = () => {
         <div className='w-full mx-auto px-4 sm:px-6 lg:px-8'>
               
             <div className="flex flex-col mt-8">
-            <div  className=' bg-gray-400 mb-3 text-center p-3 rounded text-xl  font-bold'>All Cases</div>
+            <div  className=' bg-purple-300 mb-3 text-center p-3 rounded text-xl  font-bold'>All Cases</div>
               
                 <div className="align-middle min-w-full overflow-x-auto shadow overflow-hidden sm:rounded-lg">
                     {/* <input
