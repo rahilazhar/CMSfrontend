@@ -32,7 +32,7 @@ export const Menue = [
   ];
 
 
-  export const urlapi = "http://localhost:8082"
-  // export const urlapi = "https://cms-vusq.onrender.com"
+  // export const urlapi = "http://localhost:8082"
+  export const urlapi = "https://cms-vusq.onrender.com"
 
 
