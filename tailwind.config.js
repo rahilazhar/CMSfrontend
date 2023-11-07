@@ -7,6 +7,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      animation : {
+        'blink': 'blink 1s linear infinite',
+        'color-change': 'color-change 3s linear infinite',
+      },
       colors:{
         'light-white' : ' rgba(255,255,255,0.18)'
       }

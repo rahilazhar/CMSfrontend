@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
-import {BiHash} from 'react-icons/bi'
+import { BiHash } from 'react-icons/bi'
 import { urlapi } from '../../Components/Menu';
+import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const Addcase = () => {
     const [Suitno, setSuitNo] = useState('');
@@ -12,7 +17,8 @@ const Addcase = () => {
     const [progressreport, setProgressReport] = useState('');
     const [message, setMessage] = useState('');
     const [isError, setIsError] = useState(false);
-    
+    const [age, setAge] = React.useState('');
+
 
 
 
@@ -60,152 +66,60 @@ const Addcase = () => {
 
 
 
+
     return (
         <>
-            <main className='w-full'>
-                {/* Section-1 */}
-
-                <section>
-                    <div className=' container'>
-                        <div className='bg-purple-500  p-3 text-center text-lg font-semibold'>Add Case</div>
-                        <form onSubmit={formsubmission}>
-                            <div className="grid grid-cols-2 p-4">
-
-                                <div className=''>
-
-                                    {/* SuitNo */}
-                                    <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                                        <div className="sm:col-span-4">
-                                            <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">Suit No</label>
-                                            <div className="mt-2">
-                                                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                                    <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm"><BiHash/> </span>
-                                                    <input type="text" name="username" id="username" autoComplete="username" className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="11685/2022"
-                                                        onChange={(e) => setSuitNo(e.target.value)} value={Suitno} />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {/* Nature */}
-                                    <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                                        <div className="sm:col-span-4">
-                                            <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">Nature</label>
-                                            <div className="mt-2">
-                                                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                                    <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm"> </span>
-                                                    {/* <input type="text" name="username" id="username" autoComplete="username" className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                                        placeholder="Nature" onChange={(e) => setNature(e.target.value)} value={nature} /> */}
-                                                        <textarea className='w-full rounded p-2  ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600' name="" id="" cols="3" rows="1"
-                                                        onChange={(e) => setNature(e.target.value)} value={nature}></textarea>
-                                                        
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {/* Next */}
-                                    <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                                        <div className="sm:col-span-4">
-                                            <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">Next hearing</label>
-                                            <div className="mt-2">
-                                                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                                    <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm"> </span>
-                                                    <input type="text" name="username" id="username" autoComplete="username" className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                                        placeholder="12/09/2012" onChange={(e) => setNextHearing(e.target.value)} value={nexthearing} />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* Progress */}
-                                    <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                                        <div className="sm:col-span-4">
-                                            <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">Progress report</label>
-                                            <div className="mt-2">
-
-                                                <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm"> </span>
-                                                <select onChange={(e)=>setProgressReport(e.target.value)} data-te-select-init className='w-full rounded ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 p-2 '>
-                                                    <option value="">---Select---</option>
-                                                    <option value="Yes">Yes</option>
-                                                    <option value="No">No</option>
-
-                                                </select>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-
-
-
-                                </div>
-
-                                {/* Second -col  */}
-                                <div className=' '>
-
-                                    {/* Title */}
-                                    <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                                        <div className="sm:col-span-4">
-                                            <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">Title</label>
-                                            <div className="mt-2">
-                                                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                                    <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm"> </span>
-                                                    <input type="text" name="username" id="username" autoComplete="username" className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                                        placeholder="Title" onChange={(e) => setTitle(e.target.value)} value={title} />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {/* Prev */}
-                                    <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                                        <div className="sm:col-span-4">
-                                            <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">Previous hearing</label>
-                                            <div className="mt-2">
-                                                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                                    <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm"> </span>
-                                                    <input type="text" name="username" id="username" autoComplete="username" className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                                        placeholder="12/09/2012" onChange={(e) => setPrevHearing(e.target.value)} value={prevhearing} />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {/* Fact Sheet */}
-                                    <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                                        <div className="sm:col-span-4">
-                                            <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">Fact sheet</label>
-                                            <div className="mt-2">
-                                                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                                    <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm"> </span>
-                                                    <input type="text" name="username" id="username" autoComplete="username" className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                                        placeholder="Name" onChange={(e) => setFactSheet(e.target.value)} value={factsheet} />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div>
-
-                                    </div>
-                                </div>
-
-
-                            </div>
-                            <div className='flex justify-center mt-10 '>
-                                <button type='submit' className=' bg-blue-500 px-10 py-2 rounded hover:text-white'>Submit</button>
-                            </div>
-                            {message && (
+            <body className='bg-gray-100 min-h-screen w-full flex items-center justify-center'>
+                <div className='w-[1000px] mx-auto bg-white p-6 rounded-lg shadow-lg'>
+                    <h2 class="text-2xl font-semibold mb-4 text-center">Add Case</h2>
+                    <form onSubmit={formsubmission}>
+                    <div className=' flex  justify-evenly mt-3'>
+                        <TextField className=' w-1/3' id="standard-basic" label="Title" variant="standard"
+                        onChange={(e)=>setTitle(e.target.value)} value={title} />
+                        <TextField className=' w-1/3' id="standard-basic" label="Suit No" variant="standard" 
+                        onChange={(e)=>setSuitNo(e.target.value)} value={Suitno}/>
+                    </div>
+                    <div className=' flex  justify-evenly mt-3'>
+                        <TextField className=' w-1/3' id="standard-basic" label="Nature" variant="standard"
+                        onChange={(e)=>setNature(e.target.value)}  value={nature} multiline/>
+                        <TextField className=' w-1/3' id="standard-basic" label="Previous hearing" variant="standard"
+                        onChange={(e)=>setPrevHearing(e.target.value)} value={prevhearing} />
+                    </div>
+                    <div className=' flex  justify-evenly mt-3'>
+                        <TextField className=' w-1/3' id="standard-basic" label="Next hearing" variant="standard"
+                        onChange={(e)=>setNextHearing(e.target.value)} value={nexthearing} />
+                        <TextField className=' w-1/3' id="standard-basic" label="Factsheet" variant="standard"
+                        onChange={(e)=>setFactSheet(e.target.value)} value={factsheet} />
+                    </div>
+                    <div className=' flex justify-start ml-[100px]'>
+                        <FormControl variant="standard" sx={{ m: 1, minWidth: 190 }}>
+                            <InputLabel className=' w-full' id="demo-simple-select-standard-label">Progress Report</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-standard-label"
+                                id="demo-simple-select-standard"
+                                value={progressreport}
+                                label="Age"
+                                onChange={(e)=>setProgressReport(e.target.value)}
+                            >
+                                
+                                <MenuItem value="Yes">Yes</MenuItem>
+                                <MenuItem value="No">No</MenuItem>
+                               
+                            </Select>
+                        </FormControl>
+                    </div>
+                    <div className=' flex justify-center mt-10'>
+                    <button className=' bg-purple-300 px-10 py-2 rounded hover:text-white' type='submit'>Submit</button>
+                    {message && (
                                 <div className={`p-4 text-center ${isError ? 'bg-red-500 text-white' : 'bg-green-500 text-white'}`}>
                                     {message}
                                 </div>
                             )}
-                        </form>
-
-
                     </div>
-                </section>
+                    </form>
+                </div>
 
-
-            </main>
+            </body>
         </>
     )
 }

@@ -7,6 +7,8 @@ import History from '../Screens/Cases/History'
 import Factsheet from '../Screens/Cases/Factsheet'
 import Factsheetview from '../Screens/Cases/Factsheetview'
 import Viewtodaycase from '../Screens/Cases/Viewtodaycase'
+import Factsheetedit from '../Screens/Cases/Factsheetedit'
+import Errorpage from '../Screens/Error/Errorpage'
 
 
 
@@ -22,6 +24,8 @@ const Router = () => {
        <Route path='/Factsheet/:caseId/:title' element={<Factsheet/>}/>
        <Route path='/factsheetview/:caseId' element={<Factsheetview/>}/>
        <Route path='/todaycase' element={<Viewtodaycase/>}/>
+       <Route path='/factsheetedit/:id' element={<Factsheetedit/>}/>
+       <Route path='/*' element={<Errorpage/>}/>
       
       
 

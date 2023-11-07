@@ -2,3 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Add this to your styles.css */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  
+  @keyframes color-change {
+    0% { background-color: #ff0000; }
+    25% { background-color: #00ff00; }
+    50% { background-color: #0000ff; }
+    75% { background-color: #ff00ff; }
+    100% { background-color: #00ffff; }
+  }
+  

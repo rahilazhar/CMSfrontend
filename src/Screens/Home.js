@@ -103,7 +103,7 @@ const logouthandler = () =>{
               </div>
               <hr className='mt-8 shadow-2xl' style={{ borderColor: 'black' }} />
               <div className='shadow-2xl relative top-2'>
-                <a href="">View Details</a>
+                <a href="viedetails">View Details</a>
               </div>
             </div>
 
@@ -116,7 +116,7 @@ const logouthandler = () =>{
               </div>
               <hr className='mt-8 shadow-2xl' style={{ borderColor: 'black' }} />
               <div className='shadow-2xl relative top-2'>
-                <a href="">View Details</a>
+                <a href="viewdetails">View Details</a>
               </div>
             </div>
           </div>
@@ -124,8 +124,8 @@ const logouthandler = () =>{
 
         <section className=' flex flex-col justify-center items-center h-[500px]'>
           <div className=' text-[50px] font-semibold'>WELCOME TO CMS SYSTEM</div>
-          <Link to="/addcase"> <span className=' text-lg text-blue-600'>Click here to Add your First Case</span></Link>
-          <button onClick={logouthandler}>Logout</button>
+          <Link to="/addcase"> <span className=' text-lg text-blue-600'>Click here to Add your Case</span></Link>
+          <button className=' mt-20 bg-purple-300 px-6 py-2 rounded'  onClick={logouthandler}>Logout</button>
         </section>
 
       </main>

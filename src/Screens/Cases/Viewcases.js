@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { BsFillFileEarmarkSpreadsheetFill } from 'react-icons/bs'
 import { AiFillEye } from 'react-icons/ai'
 import { urlapi } from '../../Components/Menu';
+import {MdDeleteForever} from 'react-icons/md'
 
 const Viewcases = () => {
     const [entries, setEntries] = useState([]);
@@ -45,18 +46,36 @@ const Viewcases = () => {
     // Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
+
+    const deleteEntry = async (id) => {
+        if (window.confirm('Are you sure you want to delete this case?')) {
+            try {
+                const response = await axios.delete(`${urlapi}/api/v1/auth/deleteentries/${id}`);
+                alert(response.data.Message); // Or use a more sophisticated approach for user feedback
+                // Remove the deleted entry from the state to update the UI
+                setEntries(prevEntries => prevEntries.filter(entry => entry._id !== id));
+            } catch (error) {
+                console.error('Error deleting the case: ', error);
+                alert('Failed to delete the case'); // Or display the error message returned from the server
+            }
+        }
+    };
+
     return (
         <div className='w-full mx-auto px-4 sm:px-6 lg:px-8'>
+              
             <div className="flex flex-col mt-8">
+            <div  className=' bg-gray-400 mb-3 text-center p-3 rounded text-xl  font-bold'>All Cases</div>
+              
                 <div className="align-middle min-w-full overflow-x-auto shadow overflow-hidden sm:rounded-lg">
-                    <input
+                    {/* <input
                         className='border border-black mt-3 mb-3 rounded p-3'
                         type="text"
                         placeholder='Search'
                         onChange={(e) => setSearchQuery(e.target.value)}
                         value={searchQuery}
-                    />
-                    <table className="min-w-full divide-y divide-green-900 border">
+                    /> */}
+                    <table className="min-w-full border">
                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             #
                         </th>
@@ -87,6 +106,9 @@ const Viewcases = () => {
                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             View factsheet
                         </th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Delete
+                        </th>
                         <tbody className="bg-white divide-y divide-gray-200">
                             {loading ? (
                                 <tr>
@@ -112,14 +134,17 @@ const Viewcases = () => {
                                         <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">{entry.factsheet}</td>
                                         <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">{entry.progressreport}</td>
                                         <td className="px-10 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <Link to={`/viewdetails/${entry._id}/${entry.title}`} className="text-indigo-600 hover:text-indigo-900">
+                                            <Link to={`/viewdetails/${entry._id}/${entry.title}`} className="text-indigo-600 hover:text-indigo-900 text-xl">
                                                 <AiFillEye className='' />
                                             </Link>
                                         </td>
                                         <td className=" text-center px-10 text-sm font-medium">
-                                            <Link to={`/factsheetview/${entry._id}`} className="text-indigo-600 hover:text-indigo-900">
+                                            <Link to={`/factsheetview/${entry._id}`} className="text-indigo-600 hover:text-indigo-900 text-xl">
                                                 <BsFillFileEarmarkSpreadsheetFill />
                                             </Link>
+                                        </td>
+                                        <td>
+                                           <button className=' text-2xl text-indigo-600 hover:text-red-500' onClick={() => deleteEntry(entry._id)}><MdDeleteForever/></button>
                                         </td>
                                     </tr>
                                 ))
