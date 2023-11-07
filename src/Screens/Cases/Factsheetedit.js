@@ -4,6 +4,7 @@ import toast, { Toaster } from 'react-hot-toast'
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
 import { Bars } from 'react-loader-spinner';
+import { urlapi } from '../../Components/Menu';
 
 const Factsheetedit = () => {
   const [caseEntry, setCaseEntry] = useState('');
@@ -34,7 +35,7 @@ const Factsheetedit = () => {
     };
 
     try {
-      let result = await fetch(`http://localhost:8082/api/v1/auth/editfactsheet/${id}`, {
+      let result = await fetch(`${urlapi}/api/v1/auth/editfactsheet/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -63,7 +64,7 @@ const Factsheetedit = () => {
 
   useEffect(() => {
     const getAllStaffData = async () => {
-      const response = await fetch(`http://localhost:8082/api/v1/auth/factsheet/caseentry/${id}`);
+      const response = await fetch(`${urlapi}/api/v1/auth/factsheet/caseentry/${id}`);
       const responseData = await response.json();
       console.log(responseData[0].facts);
 
