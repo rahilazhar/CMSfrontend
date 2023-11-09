@@ -9,6 +9,8 @@ import Factsheetview from '../Screens/Cases/Factsheetview'
 import Viewtodaycase from '../Screens/Cases/Viewtodaycase'
 import Factsheetedit from '../Screens/Cases/Factsheetedit'
 import Errorpage from '../Screens/Error/Errorpage'
+import TodayHearings from '../Screens/Cases/Todayhearing'
+
 
 
 
@@ -25,6 +27,7 @@ const Router = () => {
        <Route path='/factsheetview/:caseId' element={<Factsheetview/>}/>
        <Route path='/todaycase' element={<Viewtodaycase/>}/>
        <Route path='/factsheetedit/:id' element={<Factsheetedit/>}/>
+       <Route path='/todayhearings' element={<TodayHearings/>}/>
        <Route path='/*' element={<Errorpage/>}/>
       
       

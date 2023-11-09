@@ -94,7 +94,7 @@ const Factsheetedit = () => {
           </div>
           <div className=' flex  justify-evenly mt-3'>
 
-          <TextField className=' w-1/4' id="standard-basic" label="Case Instituted" variant="standard"
+            <TextField className=' w-1/4' id="standard-basic" label="Case Instituted" variant="standard"
               onChange={(e) => setCaseInstituted(e.target.value)} value={caseinstituted} />
 
             <TextField className=' w-1/4' id="standard-basic" label="Defendants" variant="standard"

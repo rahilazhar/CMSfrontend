@@ -5,6 +5,7 @@ import { BsFill0SquareFill } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Context/AuthContext';
 import { urlapi } from '../Components/Menu';
+import TodayHearings from './Cases/Todayhearing';
 
 const Home = () => {
 
@@ -122,10 +123,15 @@ const logouthandler = () =>{
           </div>
         </section>
 
-        <section className=' flex flex-col justify-center items-center h-[500px]'>
+        <section className=' flex flex-col justify-center items-center h-[200px]'>
           <div className=' text-[50px] font-semibold'>WELCOME TO CMS SYSTEM</div>
           <Link to="/addcase"> <span className=' text-lg text-blue-600'>Click here to Add your Case</span></Link>
-          <button className=' mt-20 bg-purple-300 px-6 py-2 rounded'  onClick={logouthandler}>Logout</button>
+          <button className=' bg-purple-300 px-6 py-2 rounded mt-5'  onClick={logouthandler}>Logout</button>
+        </section>
+
+
+        <section>
+          <TodayHearings/>
         </section>
 
       </main>

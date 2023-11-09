@@ -4,6 +4,7 @@ import { CaseHistoryProvider } from './Context/CaseHistoryContext';
 import { AuthProvider , useAuth } from './Context/AuthContext';
 import LoginPage from './Screens/Auth/Login';
 
+
 const App = () => {
   
   return (
@@ -12,6 +13,7 @@ const App = () => {
     <AuthProvider>
 
       <MainComponent/>
+     
     </AuthProvider>
        
   
