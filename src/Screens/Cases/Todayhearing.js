@@ -56,7 +56,7 @@ const TodayHearings = () => {
             </tr>
           ))
         :
-      <div className=' relative left-[550px] mt-20 text-red-500 font-semibold text-xl'>No Data Available</div>}
+      <div className=' relative left-[550px] mt-20 text-red-500 font-semibold text-xl'>No Hearing Today</div>}
         </tbody>
       </table>
     </div>

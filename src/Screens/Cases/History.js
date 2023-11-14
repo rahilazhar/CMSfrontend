@@ -63,6 +63,8 @@ const UpdateHistoryForm = () => {
             await updateHistory(caseId, date, proceedings);
             toast.success("Add Successfully");
             fetchHistory(caseId);
+            setDate('')
+            setProceedings('')
         } catch (error) {
             // Handle or log the error
             toast.error("An error occurred.");

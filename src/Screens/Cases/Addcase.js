@@ -64,6 +64,12 @@ const Addcase = () => {
         }
     };
 
+    const titlehandler = (e) => {
+        // Replace any forward slashes with an empty string
+        const updatedValue = e.target.value.replace(/\//g, '');
+        setTitle(updatedValue);
+    }
+
 
 
 
@@ -73,49 +79,56 @@ const Addcase = () => {
                 <div className='w-[1000px] mx-auto bg-white p-6 rounded-lg shadow-lg'>
                     <h2 class="text-2xl font-semibold mb-4 text-center">Add Case</h2>
                     <form onSubmit={formsubmission}>
-                    <div className=' flex  justify-evenly mt-3'>
-                        <TextField className=' w-1/3' id="standard-basic" label="Title" variant="standard"
-                        onChange={(e)=>setTitle(e.target.value)} value={title} />
-                        <TextField className=' w-1/3' id="standard-basic" label="Suit No" variant="standard" 
-                        onChange={(e)=>setSuitNo(e.target.value)} value={Suitno}/>
-                    </div>
-                    <div className=' flex  justify-evenly mt-3'>
-                        <TextField className=' w-1/3' id="standard-basic" label="Nature" variant="standard"
-                        onChange={(e)=>setNature(e.target.value)}  value={nature} multiline/>
-                        <TextField className=' w-1/3' id="standard-basic" label="Previous hearing" variant="standard"
-                        onChange={(e)=>setPrevHearing(e.target.value)} value={prevhearing} />
-                    </div>
-                    <div className=' flex  justify-evenly mt-3'>
-                        <TextField className=' w-1/3' id="standard-basic" label="Next hearing" variant="standard"
-                        onChange={(e)=>setNextHearing(e.target.value)} value={nexthearing} />
-                        <TextField className=' w-1/3' id="standard-basic" label="Factsheet" variant="standard"
-                        onChange={(e)=>setFactSheet(e.target.value)} value={factsheet} />
-                    </div>
-                    <div className=' flex justify-start ml-[100px]'>
-                        <FormControl variant="standard" sx={{ m: 1, minWidth: 190 }}>
-                            <InputLabel className=' w-full' id="demo-simple-select-standard-label">Progress Report</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-standard-label"
-                                id="demo-simple-select-standard"
-                                value={progressreport}
-                                label="Age"
-                                onChange={(e)=>setProgressReport(e.target.value)}
-                            >
-                                
-                                <MenuItem value="Yes">Yes</MenuItem>
-                                <MenuItem value="No">No</MenuItem>
-                               
-                            </Select>
-                        </FormControl>
-                    </div>
-                    <div className=' flex justify-center mt-10'>
-                    <button className=' bg-purple-300 px-10 py-2 rounded hover:text-white' type='submit'>Submit</button>
-                    {message && (
+
+
+                        <div className=' flex  justify-evenly mt-3'>
+                            <TextField className=' w-1/3' id="standard-basic" label="Title" variant="standard"
+                                onChange={titlehandler} value={title} />
+
+
+
+                            <TextField className=' w-1/3' id="standard-basic" label="Suit No" variant="standard"
+                                onChange={(e) => setSuitNo(e.target.value)} value={Suitno} />
+                        </div>
+
+
+                        <div className=' flex  justify-evenly mt-3'>
+                            <TextField className=' w-1/3' id="standard-basic" label="Nature" variant="standard"
+                                onChange={(e) => setNature(e.target.value)} value={nature} multiline />
+                            <TextField className=' w-1/3' id="standard-basic" label="Previous hearing" variant="standard"
+                                onChange={(e) => setPrevHearing(e.target.value)} value={prevhearing} />
+                        </div>
+                        <div className=' flex  justify-evenly mt-3'>
+                            <TextField className=' w-1/3' id="standard-basic" label="Next hearing" variant="standard"
+                                onChange={(e) => setNextHearing(e.target.value)} value={nexthearing} />
+                            <TextField className=' w-1/3' id="standard-basic" label="Factsheet" variant="standard"
+                                onChange={(e) => setFactSheet(e.target.value)} value={factsheet} />
+                        </div>
+                        <div className=' flex justify-start ml-[100px]'>
+                            <FormControl variant="standard" sx={{ m: 1, minWidth: 190 }}>
+                                <InputLabel className=' w-full' id="demo-simple-select-standard-label">Progress Report</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-standard-label"
+                                    id="demo-simple-select-standard"
+                                    value={progressreport}
+                                    label="Age"
+                                    onChange={(e) => setProgressReport(e.target.value)}
+                                >
+
+                                    <MenuItem value="Yes">Yes</MenuItem>
+                                    <MenuItem value="No">No</MenuItem>
+
+                                </Select>
+                            </FormControl>
+                        </div>
+                        <div className=' flex justify-center mt-10'>
+                            <button className=' bg-purple-300 px-10 py-2 rounded hover:text-white' type='submit'>Submit</button>
+                            {message && (
                                 <div className={`p-4 text-center ${isError ? 'bg-red-500 text-white' : 'bg-green-500 text-white'}`}>
                                     {message}
                                 </div>
                             )}
-                    </div>
+                        </div>
                     </form>
                 </div>
 
