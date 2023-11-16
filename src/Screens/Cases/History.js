@@ -30,16 +30,35 @@ const UpdateHistoryForm = () => {
     }, [caseId, fetchHistoryentry, entry]);
 
 
-
-
     useEffect(() => {
         const lowercasedQuery = searchQuery.toLowerCase();
-        const filtered = !searchQuery ? history : history.filter(entry =>
+        let filtered = !searchQuery ? history : history.filter(entry =>
             entry.date.toLowerCase().includes(lowercasedQuery) ||
             entry.proceedings.toLowerCase().includes(lowercasedQuery)
         );
+    
+        // Function to convert date from DD/MM/YY to a Date object
+        const parseDate = str => {
+            const [day, month, year] = str.split('/').map(part => parseInt(part, 10));
+            return new Date(year < 100 ? year + 2000 : year, month - 1, day);
+        };
+    
+        // Sorting the filtered history by date in ascending order
+        filtered = filtered.sort((a, b) => parseDate(a.date) - parseDate(b.date));
+    
         setFilteredHistory(filtered);
-    }, [searchQuery, history , entry]);
+    }, [searchQuery, history]);
+    
+    
+
+    // useEffect(() => {
+    //     const lowercasedQuery = searchQuery.toLowerCase();
+    //     const filtered = !searchQuery ? history : history.filter(entry =>
+    //         entry.date.toLowerCase().includes(lowercasedQuery) ||
+    //         entry.proceedings.toLowerCase().includes(lowercasedQuery)
+    //     );
+    //     setFilteredHistory(filtered);
+    // }, [searchQuery, history , entry]);
     
 
 
@@ -78,18 +97,15 @@ const UpdateHistoryForm = () => {
             alert(response.data.Message); // Alert or handle the success response
             // Refresh the state or perform any other actions after deletion
             fetchHistory(caseId)
-            
-            console.log(historyid, "historyid")
-            console.log(caseId, "caseid")
-            console.log(urlapi, "urlapi")
-            // fetchHistoryentry(caseId)
         } catch (error) {
             // Handle the error response
             alert(error.response ? error.response.data.Message : "An error occurred");
         }
 
     };
-
+     
+    
+    console.log(history , 'history____')
  
 
  
