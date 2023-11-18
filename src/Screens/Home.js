@@ -66,6 +66,7 @@ const logouthandler = () =>{
   if (error) return <p>Error: {error.message}</p>;
   return (
     <>
+     
       <main className=' w-full'>
         <section className='p-4 text-center'>
           <div className=' font-semibold text-2xl'>Dashboard</div>
@@ -74,7 +75,7 @@ const logouthandler = () =>{
           <div className=' grid grid-cols-4 gap-3 p-3 max-sm:grid-cols-1'>
 
             {/* Primary */}
-            {userRole.role =="0" && (
+           
             <div className='w-full pb-4 text-white p-4 bg-[#0d6efd] rounded'>
               <div className="flex justify-between">
                 <div>Total Cases</div>
@@ -85,7 +86,7 @@ const logouthandler = () =>{
               <Link to='/viewcases'>View Details</Link>
               </div>
             </div>
-            )}
+            
 
 
             {/* Warning */}
@@ -140,6 +141,7 @@ const logouthandler = () =>{
         </section>
 
       </main>
+    
 
     </>
   )

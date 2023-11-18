@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }) => {
     // Save the user data in local storage
     // .setItem('user', JSON.stringify(data));
     sessionStorage.setItem('user', JSON.stringify(data))
+    
     setAuthData(data);
   };
 

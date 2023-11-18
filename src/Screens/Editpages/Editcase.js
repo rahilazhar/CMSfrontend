@@ -22,7 +22,8 @@ const Editcase = () => {
     const [responseMessage, setResponseMessage] = useState('');
 
 
-
+     const user = sessionStorage.getItem('user')
+     const token = user? JSON.parse(user).token : null
     const Updatecasehandler = async (e) => {
         e.preventDefault();
     
@@ -31,7 +32,11 @@ const Editcase = () => {
         };
     
         try {
-            let response = await axios.put(`${urlapi}/api/v1/auth/editentries/${id}`, updateddata);
+            let response = await axios.put(`${urlapi}/api/v1/auth/editentries/${id}`, updateddata , {
+                headers: {
+                    'Authorization': `Bearer ${token}` // Include the token in the header
+                }
+            });
             // Update the message extraction here
             setResponseMessage(response.data.message || "Entry updated successfully");
             
@@ -89,7 +94,7 @@ const Editcase = () => {
 
     const Adminrequest = async() => {
         try {
-            const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NDY3YjNlNjg1ZDA3YjZkOTJlZjJhOCIsImlhdCI6MTcwMDMwNDczMSwiZXhwIjoxNzAwMzA4MzMxfQ._Z5Is9pJAuCKWQydJq1BiJJsHwOQPi-C7XGqPoSPJNg'; // Replace with the actual JWT token
+            
             const response = await fetch(`http://localhost:8082/api/v1/auth/reqedit/${id}`, {
                 method: 'POST',
                 headers: {

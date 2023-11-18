@@ -13,6 +13,7 @@ import TodayHearings from '../Screens/Cases/Todayhearing'
 import ViewcaseModal from './ViewcaseModal'
 import Editcase from '../Screens/Editpages/Editcase'
 import Editrequest from '../Screens/Editpages/Editrequest'
+import Usersview from '../Screens/Userscreens/Usersview'
 
 
 
@@ -35,6 +36,7 @@ const Router = () => {
        <Route path='/vmodal' element={<ViewcaseModal/>}/>
        <Route path='/Editcase/:id' element={<Editcase/>}/>
        <Route path='/editreq' element={<Editrequest/>}/>
+       <Route path='/user' element={<Usersview/>}/>
       
       
 

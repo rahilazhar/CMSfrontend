@@ -3,12 +3,16 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContext';
 import { urlapi } from '../../Components/Menu';
+import { Navigate } from 'react-router-dom';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+
   const navigate = useNavigate()
+
+  
 
   const { login } = useAuth(); // Use the login function from the AuthContext
 
@@ -22,10 +26,20 @@ function LoginPage() {
 
       // Use the login function from AuthContext to set the user as logged in
       login({ email, role, id, name, token }); // Pass the response data to the login context method
-
+      if (role === 0){
+        navigate('/')
+      } else if (role === 1){
+        navigate('/user')
+      } else {
+        navigate('/*') // Redirect to a login page or other appropriate route
+      }
       // After successful login, redirect to the desired page
-      navigate('/'); // Redirect to the homepage or dashboard as per your routing setup
+      // Redirect to the homepage or dashboard as per your routing setup
       alert('Login Successful');
+
+      
+      
+      
     } catch (error) {
       console.error('Login Failed:', error.response ? error.response.data : error.message);
       // You can alert or show error to the user here

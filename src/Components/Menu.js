@@ -1,10 +1,17 @@
-export const Menue = [
+export const Menue = (userrole) => {
+
+  console.log(userrole , 'userrole')
+
+  return [
     // { title: "Dashboard", link: "/#" },
     // { title: "Pages", link: "/pages" },
     // { title: "Media", link: "/media", spacing: true },
+
     {
-    title: "Dashboard",
-    link: "/"
+      title: "Dashboard",
+      link: "/",
+      hidden: userrole !== "0",
+
     },
     {
       title: "Add Case",
@@ -18,21 +25,23 @@ export const Menue = [
       // ],
     },
     {
-      title:"View Cases",
-      link:'/viewcases'
+      title: "View Cases",
+      link: '/viewcases'
     },
-  
-   
+
+
     // { title: "Media", link: "/media", spacing: true },
-   
-  
+
+
     // { title: "Profile", link: "/profile", spacing: true },
     // { title: "Setting", link: "/setting" },
     // { title: "Logout", link: "/logout" },
   ];
 
+}
 
-  // export const urlapi = "http://localhost:8082"
-  export const urlapi = "https://cms-vusq.onrender.com"
 
+export const urlapi = "http://localhost:8082"
+// export const urlapi = "https://cms-vusq.onrender.com"
+// 
 
