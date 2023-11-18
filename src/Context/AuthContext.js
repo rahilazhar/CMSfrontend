@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [authData, setAuthData] = useState(() => {
     // Get the user data from local storage on initial load
     try {
-      const storedData = localStorage.getItem('user');
+      const storedData = sessionStorage.getItem('user');
       return storedData ? JSON.parse(storedData) : null;
     } catch {
       return null;
@@ -18,13 +18,14 @@ export const AuthProvider = ({ children }) => {
 
   const login = (data) => {
     // Save the user data in local storage
-    localStorage.setItem('user', JSON.stringify(data));
+    // .setItem('user', JSON.stringify(data));
+    sessionStorage.setItem('user', JSON.stringify(data))
     setAuthData(data);
   };
 
   const logout = (data) => {
     // Remove the user data from local storage and update state
-    localStorage.removeItem('user');
+    sessionStorage.removeItem('user');
     setAuthData(null);
   };
 

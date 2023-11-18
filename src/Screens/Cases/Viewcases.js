@@ -5,6 +5,8 @@ import { BsFillFileEarmarkSpreadsheetFill } from 'react-icons/bs'
 import { AiFillEye } from 'react-icons/ai'
 import { urlapi } from '../../Components/Menu';
 import {MdDeleteForever} from 'react-icons/md'
+import BasicModal from '../../Components/ViewcaseModal';
+import { FaRegEdit } from "react-icons/fa";
 
 const Viewcases = () => {
     const [entries, setEntries] = useState([]);
@@ -13,6 +15,8 @@ const Viewcases = () => {
     const [filteredHistory, setFilteredHistory] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [entriesPerPage] = useState(10); // Set the number of entries you want per page
+    const [selectednature, setSelectedNature] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
 
     useEffect(() => {
         const lowercasedQuery = searchQuery.toLowerCase();
@@ -61,6 +65,41 @@ const Viewcases = () => {
         }
     };
 
+    const natureviewhandler = (nature) => {
+        setSelectedNature(nature)
+        setModalOpen(true);
+    }
+
+    const handleClose = () => {
+        setModalOpen(false);
+        setSelectedNature(null); // Resetting selectednature when the modal is closed
+    };
+
+    // const Editcasehandler = async (userId, updateData) => {
+    //     try {
+    //         // Make an HTTP PUT request to the back-end
+    //         const response = await axios.put(`http://localhost:8082/api/v1/auth/editentries/${userId}`, updateData);
+    
+    //         // Check for successful response
+    //         if (response.status === 200) {
+    //             console.log('Entry updated successfully:', response.data);
+    //             return response.data;
+    //         } else {
+    //             console.error('Failed to update entry:', response.status, response.data);
+    //             return null;
+    //         }
+    //     } catch (error) {
+    //         // Handle any errors that occur during the HTTP request
+    //         console.error('Error while updating entry:', error.message);
+    //         return null;
+    //     }
+    // }
+    
+
+
+    
+    
+
     return (
         <div className='w-full mx-auto px-4 sm:px-6 lg:px-8'>
               
@@ -76,38 +115,41 @@ const Viewcases = () => {
                         value={searchQuery}
                     /> */}
                     <table className="min-w-full border">
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
                             #
                         </th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" className="px-6 py-3 text-lef text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Suit No
                         </th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Title
                         </th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Nature
                         </th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
                             prev-hearing
                         </th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
                             next-hearing
                         </th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Fact sheet
                         </th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Report
                         </th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
                             View Details
                         </th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
                             View factsheet
                         </th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Delete
+                        </th>
+                        <th scope="col" className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Edit
                         </th>
                         <tbody className="bg-white divide-y divide-gray-200">
                             {loading ? (
@@ -124,11 +166,13 @@ const Viewcases = () => {
                                 </tr>
                             ) : (
                                 currentEntries.map((entry, index) => (
-                                    <tr key={entry._id} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-gray-100`}>
+                                    <tr key={entry._id} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-gray-100 text-center`}>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{index + 1}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.Suitno}</td>
+                                        <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">{entry.Suitno}</td>
                                         <td className="px- py-4 whitespace-normal text-sm text-gray-500">{entry.title}</td>
-                                        <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">{entry.nature}</td>
+                                        <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">
+                                           <button className=' text-blue-500 hover:text-blue-900' onClick={()=>natureviewhandler(entry.nature)}>View</button>
+                                        </td>
                                         <td className=" py-4 whitespace-normal text-sm text-gray-500">{entry.prevhearing}</td>
                                         <td className=" py-4 whitespace-normal text-sm text-gray-500">{entry.nexthearing}</td>
                                         <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">{entry.factsheet}</td>
@@ -145,6 +189,12 @@ const Viewcases = () => {
                                         </td>
                                         <td>
                                            <button className=' text-2xl text-indigo-600 hover:text-red-500' onClick={() => deleteEntry(entry._id)}><MdDeleteForever/></button>
+                                        </td>
+                                        
+                                         <td className=" text-center px-10 text-sm font-medium">
+                                            <Link to={`/Editcase/${entry._id}`} className="text-indigo-600 hover:text-indigo-900 text-xl">
+                                            <FaRegEdit />
+                                            </Link>
                                         </td>
                                     </tr>
                                 ))
@@ -178,6 +228,13 @@ const Viewcases = () => {
                     </div>
                 </div>
             </div>
+            {selectednature && (
+                <BasicModal
+                    open={modalOpen}
+                    handleClose={handleClose}
+                    Naturedata={selectednature}
+                />
+            )}
         </div>
     );
 }

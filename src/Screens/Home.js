@@ -17,6 +17,9 @@ const Home = () => {
   const [error, setError] = useState(null);
 
   const navigate = useNavigate()
+  
+  const userRole = JSON.parse(sessionStorage.getItem('user'))
+ 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,6 +74,7 @@ const logouthandler = () =>{
           <div className=' grid grid-cols-4 gap-3 p-3 max-sm:grid-cols-1'>
 
             {/* Primary */}
+            {userRole.role =="0" && (
             <div className='w-full pb-4 text-white p-4 bg-[#0d6efd] rounded'>
               <div className="flex justify-between">
                 <div>Total Cases</div>
@@ -81,6 +85,7 @@ const logouthandler = () =>{
               <Link to='/viewcases'>View Details</Link>
               </div>
             </div>
+            )}
 
 
             {/* Warning */}
@@ -104,7 +109,7 @@ const logouthandler = () =>{
               </div>
               <hr className='mt-8 shadow-2xl' style={{ borderColor: 'black' }} />
               <div className='shadow-2xl relative top-2'>
-                <a href="viedetails">View Details</a>
+                <Link to="/editreq">View Details</Link>
               </div>
             </div>
 
