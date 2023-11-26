@@ -1,4 +1,4 @@
-import React, { useState  , useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { BsArrowLeftShort, BsChevronDown } from 'react-icons/bs'
 import { AiFillEnvironment } from 'react-icons/ai'
 import { AiOutlineSearch } from 'react-icons/ai'
@@ -20,7 +20,7 @@ const Sidebar = () => {
     setMenuItems(Menue(role));
   }, []);
 
-  console.log(menuItems , 'menu')
+  console.log(menuItems, 'menu')
 
 
 
@@ -51,7 +51,7 @@ const Sidebar = () => {
                   <>
                     <li key={index} className={` text-gray-300 flex items-center text-sm gap-x-4 cursor-pointer p-2 hover:bg-light-white rounded-md ${items.spacing ? "mt-9" : "mt-2"}`}>
                       <span><RiDashboardFill /></span>
-                      <span className={`font-medium text-base flex-1 duration-200 ${!open && " hidden"}`}>  <a href={items.link}>{items.title}</a></span>
+                      <span className={`font-medium text-base flex-1 duration-200 ${!open && " hidden"}`}>  <Link to={items.link}>{items.title}</Link></span>
 
                       {items.submenue && open && (
                         <BsChevronDown className={` duration-300 ${submenueopen && "rotate-180"}`} onClick={() => setSubmenueopen(!submenueopen)} />
@@ -63,7 +63,7 @@ const Sidebar = () => {
 
                         {items.submenueitems.map((sub, index) => (
                           <li key={index} className='  duration-300 text-gray-300 flex items-center text-sm gap-x-4 cursor-pointer p-2 px-5 hover:bg-light-white rounded-md'>
-                            <a href={sub.link}>{sub.title}</a>
+                            <Link to={sub.link}>{sub.title}</Link>
                           </li>
                         ))}
 

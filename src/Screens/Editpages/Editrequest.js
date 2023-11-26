@@ -18,11 +18,11 @@ const Editrequest = () => {
         fetchdata()
     }, [])
 
-    const Approvehandler = async ( selectedValue , id) => {
+    const Approvehandler = async (selectedValue, id) => {
         if (window.confirm(`Are you sure to ${selectedValue} this Request`)) {
             try {
                 let response = await axios.post(`${urlapi}/api/v1/auth/updaterequest/${id}`, { status: selectedValue });
-    
+
                 if (response.status === 200) {
                     // Handle success - maybe update the UI or show a success message
                     console.log("Request updated successfully:", response.data);
@@ -40,10 +40,7 @@ const Editrequest = () => {
         }
     };
 
-    
-    
 
-    console.log(data, 'data______')
     return (
         <div className=' w-full'>
             <div className=' bg-purple-300 mb-3 text-center p-3 rounded text-xl  font-bold'>Pending Approvals</div>
@@ -75,14 +72,14 @@ const Editrequest = () => {
                 <th scope="col" className="p-2 text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Status
                 </th>
-              
+
                 <th scope="col" className="p-2 text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Approve
                 </th>
-              
+
                 {
                     data.map((item, index) => {
-                        console.log(item , 'item______')
+                        console.log(item, 'item______')
 
                         return (
                             <>
@@ -99,13 +96,13 @@ const Editrequest = () => {
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.caseId.progressreport}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.status}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                           <select className='w-[150px] p-2' onChange={(e)=> Approvehandler(e.target.value ,item.caseId._id)}>
-                                            <option value="">--Select--</option>
-                                            <option value="approved">Approve</option>
-                                            <option value="rejected">Reject</option>
-                                           </select>
+                                            <select className='w-[150px] p-2' onChange={(e) => Approvehandler(e.target.value, item.caseId._id)}>
+                                                <option value="">--Select--</option>
+                                                <option value="approved">Approve</option>
+                                                <option value="rejected">Reject</option>
+                                            </select>
                                         </td>
-                                    
+
                                     </tr>
                                 </tbody>
                             </>

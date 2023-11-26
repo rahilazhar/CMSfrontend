@@ -12,6 +12,7 @@ export const CaseHistoryProvider = ({ children }) => {
     const [message, setMessage] = useState('');
     const [updatemessage, setUpdatemessage] = useState('');
     const [loading, setLoading] = useState(false); // New loading state
+    const [editget, setEditget] = useState([]); // New loading state
 
     // Fetch case history function
     const fetchHistory = async (caseId) => {
@@ -95,6 +96,21 @@ export const CaseHistoryProvider = ({ children }) => {
     //         setLoading(false); // Indicate loading has finished
     //     }
     // };
+
+
+    const Editrequestget = async (caseId) => {
+        setLoading(true); // Start loading
+        try {
+            const url = `${urlapi}/api/v1/auth/editreqget`;
+            const response = await axios.get(url);
+            setEditget(response.data);
+            
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false); // Stop loading
+        }
+    };
     
     
 
@@ -102,7 +118,7 @@ export const CaseHistoryProvider = ({ children }) => {
 
 
     return (
-        <CaseHistoryContext.Provider value={{ history, message, entry, updatemessage , factview, loading, fetchfactsheet, fetchHistoryentry, fetchHistory, updateHistory }}>
+        <CaseHistoryContext.Provider value={{ history, message, entry, updatemessage ,editget , factview, loading, fetchfactsheet, fetchHistoryentry, fetchHistory, updateHistory , Editrequestget }}>
             {children}
         </CaseHistoryContext.Provider>
     );

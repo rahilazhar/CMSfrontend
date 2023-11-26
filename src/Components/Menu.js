@@ -10,12 +10,13 @@ export const Menue = (userrole) => {
     {
       title: "Dashboard",
       link: "/",
-      hidden: userrole !== "0",
+      hidden: userrole !== "1",
 
     },
     {
       title: "Add Case",
       link: "/addcase",
+      
       // submenue: true,
       // submenueitems: [
       //   { title: "Add Staff", link: "/addstaff" },
@@ -26,7 +27,13 @@ export const Menue = (userrole) => {
     },
     {
       title: "View Cases",
-      link: '/viewcases'
+      link: '/viewcases',
+      
+    },
+    {
+      title: "Users",
+      link: '/getallusers',
+      
     },
 
 
@@ -43,5 +50,5 @@ export const Menue = (userrole) => {
 
 // export const urlapi = "http://localhost:8082"
 export const urlapi = "https://cms-vusq.onrender.com"
-// 
+// http://10.0.2.2:8082/api/v1/auth/entries
 

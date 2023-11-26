@@ -95,11 +95,11 @@ const Addcase = () => {
                         <div className=' flex  justify-evenly mt-3'>
                             <TextField className=' w-1/3' id="standard-basic" label="Nature" variant="standard"
                                 onChange={(e) => setNature(e.target.value)} value={nature} multiline />
-                            <TextField className=' w-1/3' id="standard-basic" label="Previous hearing" variant="standard"
+                            <TextField className=' w-1/3' id="standard-basic" label="Previous hearing" variant="standard" placeholder='2023-08-14'
                                 onChange={(e) => setPrevHearing(e.target.value)} value={prevhearing} />
                         </div>
                         <div className=' flex  justify-evenly mt-3'>
-                            <TextField className=' w-1/3' id="standard-basic" label="Next hearing" variant="standard"
+                            <TextField className=' w-1/3' id="standard-basic" label="Next hearing" variant="standard" placeholder='2023-09-14'
                                 onChange={(e) => setNextHearing(e.target.value)} value={nexthearing} />
                             <TextField className=' w-1/3' id="standard-basic" label="Factsheet" variant="standard"
                                 onChange={(e) => setFactSheet(e.target.value)} value={factsheet} />

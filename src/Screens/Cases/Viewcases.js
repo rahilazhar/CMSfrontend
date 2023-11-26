@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { BsFillFileEarmarkSpreadsheetFill } from 'react-icons/bs'
 import { AiFillEye } from 'react-icons/ai'
 import { urlapi } from '../../Components/Menu';
-import {MdDeleteForever} from 'react-icons/md'
+import { MdDeleteForever } from 'react-icons/md'
 import BasicModal from '../../Components/ViewcaseModal';
 import { FaRegEdit } from "react-icons/fa";
 
@@ -19,13 +19,14 @@ const Viewcases = () => {
     const [modalOpen, setModalOpen] = useState(false);
 
     useEffect(() => {
+        // Filter logic remains the same
         const lowercasedQuery = searchQuery.toLowerCase();
         const filtered = !searchQuery ? entries : entries.filter(entry =>
             entry.title.toLowerCase().includes(lowercasedQuery) ||
             entry.nature.toLowerCase().includes(lowercasedQuery)
         );
         setFilteredHistory(filtered);
-
+        setCurrentPage(1); // Reset to the first page when search query changes
     }, [searchQuery, entries]);
 
     useEffect(() => {
@@ -79,7 +80,7 @@ const Viewcases = () => {
     //     try {
     //         // Make an HTTP PUT request to the back-end
     //         const response = await axios.put(`http://localhost:8082/api/v1/auth/editentries/${userId}`, updateData);
-    
+
     //         // Check for successful response
     //         if (response.status === 200) {
     //             console.log('Entry updated successfully:', response.data);
@@ -94,26 +95,26 @@ const Viewcases = () => {
     //         return null;
     //     }
     // }
-    
 
 
-    
-    
+
+
+
 
     return (
-        <div className='w-full mx-auto px-4 sm:px-6 lg:px-8'>
-              
+        <div className='w-full mx-auto px-4 sm:px-6 lg:px-8 bg-gray-100'>
+
             <div className="flex flex-col mt-8">
-            <div  className=' bg-purple-300 mb-3 text-center p-3 rounded text-xl  font-bold'>All Cases</div>
-              
+                <div className=' bg-purple-300 mb-3 text-center p-3 rounded text-xl  font-bold'>All Cases</div>
+
                 <div className="align-middle min-w-full overflow-x-auto shadow overflow-hidden sm:rounded-lg">
-                    {/* <input
-                        className='border border-black mt-3 mb-3 rounded p-3'
+                    <input
+                        className='border border-black mt-3 mb-3 rounded p-3 w-full'
                         type="text"
                         placeholder='Search'
                         onChange={(e) => setSearchQuery(e.target.value)}
                         value={searchQuery}
-                    /> */}
+                    />
                     <table className="min-w-full border">
                         <th scope="col" className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
                             #
@@ -171,7 +172,7 @@ const Viewcases = () => {
                                         <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">{entry.Suitno}</td>
                                         <td className="px- py-4 whitespace-normal text-sm text-gray-500">{entry.title}</td>
                                         <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">
-                                           <button className=' text-blue-500 hover:text-blue-900' onClick={()=>natureviewhandler(entry.nature)}>View</button>
+                                            <button className=' text-blue-500 hover:text-blue-900' onClick={() => natureviewhandler(entry.nature)}>View</button>
                                         </td>
                                         <td className=" py-4 whitespace-normal text-sm text-gray-500">{entry.prevhearing}</td>
                                         <td className=" py-4 whitespace-normal text-sm text-gray-500">{entry.nexthearing}</td>
@@ -188,12 +189,12 @@ const Viewcases = () => {
                                             </Link>
                                         </td>
                                         <td>
-                                           <button className=' text-2xl text-indigo-600 hover:text-red-500' onClick={() => deleteEntry(entry._id)}><MdDeleteForever/></button>
+                                            <button className=' text-2xl text-indigo-600 hover:text-red-500' onClick={() => deleteEntry(entry._id)}><MdDeleteForever /></button>
                                         </td>
-                                        
-                                         <td className=" text-center px-10 text-sm font-medium">
+
+                                        <td className=" text-center px-10 text-sm font-medium">
                                             <Link to={`/Editcase/${entry._id}`} className="text-indigo-600 hover:text-indigo-900 text-xl">
-                                            <FaRegEdit />
+                                                <FaRegEdit />
                                             </Link>
                                         </td>
                                     </tr>
@@ -201,6 +202,8 @@ const Viewcases = () => {
                             )}
                         </tbody>
                     </table>
+
+                    
                     {/* Pagination controls start here */}
                     <div className='flex justify-center items-center mt-4'>
                         <nav aria-label="Pagination">
@@ -210,8 +213,7 @@ const Viewcases = () => {
                                         <button
                                             onClick={() => paginate(number)}
                                             aria-current={currentPage === number ? 'page' : undefined}
-                                            className={`
-            ${currentPage === number
+                                            className={`${currentPage === number
                                                     ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600'
                                                     : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
                                                 }

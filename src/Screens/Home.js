@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect , useContext } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { BsFill0SquareFill } from "react-icons/bs";
@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Context/AuthContext';
 import { urlapi } from '../Components/Menu';
 import TodayHearings from './Cases/Todayhearing';
+import { CaseHistoryContext } from '../Context/CaseHistoryContext';
+import { UserContext } from '../Context/Usercontext';
 
 const Home = () => {
 
@@ -21,6 +23,9 @@ const Home = () => {
   const userRole = JSON.parse(sessionStorage.getItem('user'))
  
 
+  const {editget , Editrequestget } = useContext(CaseHistoryContext);
+ 
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -33,8 +38,9 @@ const Home = () => {
         setLoading(false);
       }
     };
-
+   Editrequestget()
     fetchData();
+   
   }, []);
 
   
@@ -51,7 +57,7 @@ useEffect(() => {
       setLoading(false);
     }
   };
-
+   
   fetchTodayCases();
 }, []);
 
@@ -64,6 +70,9 @@ const logouthandler = () =>{
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
+
+  console.log(userRole ,  'userrole')
+  
   return (
     <>
      
@@ -75,7 +84,7 @@ const logouthandler = () =>{
           <div className=' grid grid-cols-4 gap-3 p-3 max-sm:grid-cols-1'>
 
             {/* Primary */}
-           
+          
             <div className='w-full pb-4 text-white p-4 bg-[#0d6efd] rounded'>
               <div className="flex justify-between">
                 <div>Total Cases</div>
@@ -86,6 +95,7 @@ const logouthandler = () =>{
               <Link to='/viewcases'>View Details</Link>
               </div>
             </div>
+        
             
 
 
@@ -105,8 +115,8 @@ const logouthandler = () =>{
             {/* Success */}
             <div className='w-full pb-4 text-white p-4 bg-[#198754] rounded'>
               <div className="flex justify-between">
-                <div>Success Card</div>
-                <div>0</div>
+                <div>Pending Approvals</div>
+                <div>{editget.length > 0 ? editget.length : "0"}</div>
               </div>
               <hr className='mt-8 shadow-2xl' style={{ borderColor: 'black' }} />
               <div className='shadow-2xl relative top-2'>

@@ -27,15 +27,16 @@ function LoginPage() {
       // Use the login function from AuthContext to set the user as logged in
       login({ email, role, id, name, token }); // Pass the response data to the login context method
       if (role === 0){
-        navigate('/')
-      } else if (role === 1){
         navigate('/user')
+      } else if (role === 1){
+        navigate('/')
       } else {
         navigate('/*') // Redirect to a login page or other appropriate route
       }
       // After successful login, redirect to the desired page
       // Redirect to the homepage or dashboard as per your routing setup
       alert('Login Successful');
+      console.log(role , 'Role_______')
 
       
       

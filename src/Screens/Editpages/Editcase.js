@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect , useContext } from 'react'
 import { urlapi } from '../../Components/Menu';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -7,6 +7,8 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { UserContext } from '../../Context/Usercontext';
+import { AuthContext } from '../../Context/AuthContext';
 
 const Editcase = () => {
     const { id } = useParams()
@@ -21,37 +23,46 @@ const Editcase = () => {
     const [isError, setIsError] = useState(false);
     const [responseMessage, setResponseMessage] = useState('');
 
-
+// Get the user from the session storage and then take the toke on that user 
     const user = sessionStorage.getItem('user')
     const token = user ? JSON.parse(user).token : null
-    const Updatecasehandler = async (e) => {
-        e.preventDefault();
 
-        const updateddata = {
-            title: title
-        };
 
-        try {
-            let response = await axios.put(`${urlapi}/api/v1/auth/editentries/${id}`, updateddata, {
-                headers: {
-                    'Authorization': `Bearer ${token}` // Include the token in the header
-                }
-            });
-            // Update the message extraction here
-            setResponseMessage(response.data.message || "Entry updated successfully");
 
-        } catch (error) {
-            console.error('Error updating data:', error);
-            // Update this part to handle errors more gracefully
-            if (error.response && error.response.data) {
-                // If the backend sends a specific message, display it
-                setResponseMessage(error.response.data.message);
-            } else {
-                // Generic message for other types of errors
-                setResponseMessage('Failed to update entry');
+// this handler is used to update the edit details of the case 
+// [Update Edit Details]
+const Updatecasehandler = async (e) => {
+    e.preventDefault();
+    
+    const updateddata = { title: title };
+    try {
+        let response = await axios.put(`${urlapi}/api/v1/auth/editentries/${id}`, updateddata, {
+            headers: {
+                'Authorization': `Bearer ${token}` // Include the token in the header
             }
+        });
+        // Update the message extraction here
+        setResponseMessage(response.data.message || "Entry updated successfully");
+    } catch (error) {
+        console.error('Error updating data:', error);
+
+        // Check if the error is related to authentication
+        if (error.response && error.response.data) {
+            if (error.response.status === 401) { // 401 is the status code for authentication errors
+                setResponseMessage(error.response.data.error || 'Please authenticate.');
+            } else {
+                // Handle other types of errors that might come from the backend
+                setResponseMessage(error.response.data.message || 'Failed to update entry');
+            }
+        } else {
+            // Generic message for other types of errors (like network issues)
+            setResponseMessage('Failed to update entry');
         }
-    };
+    }
+};
+
+
+    // [-----------------------------------------------------------------------------------------------------]
 
 
 
@@ -65,7 +76,6 @@ const Editcase = () => {
                 if (id) {
                     apiUrl += `/${id}`;
                 }
-
                 const response = await axios.get(apiUrl);
                 const data = response.data;
 
@@ -114,6 +124,19 @@ const Editcase = () => {
             alert('Failed to send edit request');
         }
     }
+
+
+    useEffect(() => {
+        if (responseMessage) {
+            const timer = setTimeout(() => {
+                setResponseMessage('');
+            }, 2000); // Clear the message after 2 seconds
+    
+            // Clean up the timer when the component is unmounted or the message changes
+            return () => clearTimeout(timer);
+        }
+    }, [responseMessage]); // Dependency array, this effect runs every time responseMessage changes
+    
 
 
 

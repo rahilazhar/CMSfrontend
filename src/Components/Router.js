@@ -14,6 +14,7 @@ import ViewcaseModal from './ViewcaseModal'
 import Editcase from '../Screens/Editpages/Editcase'
 import Editrequest from '../Screens/Editpages/Editrequest'
 import Usersview from '../Screens/Userscreens/Usersview'
+import Getusers from '../Screens/Users/Getusers'
 
 
 
@@ -37,6 +38,7 @@ const Router = () => {
        <Route path='/Editcase/:id' element={<Editcase/>}/>
        <Route path='/editreq' element={<Editrequest/>}/>
        <Route path='/user' element={<Usersview/>}/>
+       <Route path='/getallusers' element={<Getusers/>}/>
       
       
 
