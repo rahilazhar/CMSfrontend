@@ -21,7 +21,7 @@ function LoginPage() {
 
     try {
       // Replace with your actual login API endpoint
-      const response = await axios.post(`${urlapi}/api/v1/auth/login`, { email, password });
+      const response = await axios.post(`http://194.163.45.84:8000/api/v1/auth/login`, { email, password });
       const { token, id, role, name } = response.data;
 
       // Use the login function from AuthContext to set the user as logged in
