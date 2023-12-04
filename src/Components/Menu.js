@@ -48,7 +48,7 @@ export const Menue = (userrole) => {
 }
 
 
-export const urlapi = "http://194.163.45.84:8000"
+export const urlapi = "http://194.163.45.84:80001"
 // export const urlapi = "https://cms-vusq.onrender.com"
 // http://10.0.2.2:8082/api/v1/auth/entries
 
