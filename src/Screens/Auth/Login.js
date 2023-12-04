@@ -12,7 +12,7 @@ function LoginPage() {
 
   const navigate = useNavigate()
 
-  
+
 
   const { login } = useAuth(); // Use the login function from the AuthContext
 
@@ -21,14 +21,14 @@ function LoginPage() {
 
     try {
       // Replace with your actual login API endpoint
-      const response = await axios.post(`http://194.163.45.84:8000/api/v1/auth/login`, { email, password });
+      const response = await axios.post(`http://api.zianshahlegalconsultant.com/api/v1/auth/login`, { email, password });
       const { token, id, role, name } = response.data;
 
       // Use the login function from AuthContext to set the user as logged in
       login({ email, role, id, name, token }); // Pass the response data to the login context method
-      if (role === 0){
+      if (role === 0) {
         navigate('/user')
-      } else if (role === 1){
+      } else if (role === 1) {
         navigate('/')
       } else {
         navigate('/*') // Redirect to a login page or other appropriate route
@@ -36,11 +36,11 @@ function LoginPage() {
       // After successful login, redirect to the desired page
       // Redirect to the homepage or dashboard as per your routing setup
       alert('Login Successful');
-      console.log(role , 'Role_______')
+      console.log(role, 'Role_______')
 
-      
-      
-      
+
+
+
     } catch (error) {
       console.error('Login Failed:', error.response ? error.response.data : error.message);
       // You can alert or show error to the user here
@@ -55,9 +55,9 @@ function LoginPage() {
         backgroundImage: "url('https://as1.ftcdn.net/v2/jpg/01/22/71/96/1000_F_122719641_V0yw2cAOrfxsON3HeWi2Sf4iVxhv27QO.jpg')",
       }}
     >
-      
+
       <div className="flex items-center justify-center h-full">
-        
+
         <div
           className="w-full max-w-xs p-8 bg-gray-100   bg-opacity-50 rounded-lg shadow-xl"
           style={{
@@ -67,9 +67,9 @@ function LoginPage() {
             backgroundRepeat: 'no-repeat',
           }}
         >
-         
+
           <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
-          <div className=' text-center bg-amber-500 p-4 text-xl bg-opacity-90 text-white font-bold'>ZIA & SHAH</div>
+            <div className=' text-center bg-amber-500 p-4 text-xl bg-opacity-90 text-white font-bold'>ZIA & SHAH</div>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Email
