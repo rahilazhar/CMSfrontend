@@ -69,7 +69,7 @@ function LoginPage() {
         >
 
           <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
-            <div className=' text-center bg-amber-500 p-4 text-xl bg-opacity-90 text-white font-bold'>ZIA & SHAH</div>
+            <div className=' text-center bg-blue-500 p-4 text-xl bg-opacity-90 text-white font-bold'>ZIA & SHAH</div>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Email
