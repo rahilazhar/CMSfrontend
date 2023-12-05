@@ -27,7 +27,7 @@ const MainComponent = () => {
   const { authData } = useAuth();
   return (
     <CaseHistoryProvider>
-      {authData ? <Sidebar /> : <LoginPage />}
+      {authData ? <Sidebar /> : <Sidebar />}
     </CaseHistoryProvider>
   );
 };
